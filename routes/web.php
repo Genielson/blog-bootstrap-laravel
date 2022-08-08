@@ -29,4 +29,10 @@ Route::get('/contato',function(){
     return view('site.contact');
 })->name('contato');
 
+Route::get('/sobre',function(){
+   return view('site.about');
+})->name('sobre');
 
+Route::get('/ultimas-noticias',function(){
+    return view('site.last-news');
+})->name('last-news');
