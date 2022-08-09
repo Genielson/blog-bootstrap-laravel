@@ -27,12 +27,16 @@ Route::get('/categorias',function(){
 
 Route::get('/contato',function(){
     return view('site.contact');
-})->name('contato');
+})->name('contact');
 
 Route::get('/sobre',function(){
    return view('site.about');
-})->name('sobre');
+})->name('about');
 
 Route::get('/ultimas-noticias',function(){
     return view('site.last-news');
 })->name('last-news');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
