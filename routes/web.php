@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Category;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,5 +38,12 @@ Route::get('/ultimas-noticias',function(){
 })->name('last-news');
 
 Auth::routes();
+
+Route::group(['middlware' => ['auth']] , function(){
+    Route::get('admin/categories', function(){
+        $categorias = Category::all();
+        return view('categories',['categorias' => $categorias]);
+    });
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

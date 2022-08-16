@@ -262,7 +262,7 @@ return [
 
         [
             'text' => 'Categorias',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/categories',
             'icon' => 'fas fa-fw fa-lock',
         ],
 
