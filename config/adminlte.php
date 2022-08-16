@@ -237,7 +237,7 @@ return [
         ],
 
         // Sidebar items:
-        
+
 
         [
             'text' => 'blog',
@@ -265,7 +265,6 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
-
 
 
 
