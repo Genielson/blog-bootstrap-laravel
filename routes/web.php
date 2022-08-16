@@ -44,6 +44,8 @@ Route::group(['middlware' => ['auth']] , function(){
         $categorias = Category::all();
         return view('categories',['categorias' => $categorias]);
     });
+
 });
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
