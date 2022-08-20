@@ -9,19 +9,23 @@
 
 @section('content')
 
-    <a class="btn btn-success" href="{{route('admin/new-category')}}"> Nova categoria </a>
+    <a class="btn btn-success" href="{{route('admin.category')}}"> Nova categoria </a>
 
     @if(isset($categorias) && count($categorias) <= 0)
          <h1> Não existe nenhuma categorias cadastradas</h1>
     @else
 
+        <tr class="table table-striped">
+
         @foreach($categorias as $categoria)
-            <tr class="table">
+                <tr>
                 <td> {{$categoria['title']}}</td>
                 <td> <a href="" class="btn btn-success"> Editar </a></td>
                 <td> <a href="" class="btn btn-danger"> Deletar </a></td>
-            </tr>
+                </tr>
         @endforeach
+
+        </tr>
 
    @endif
 

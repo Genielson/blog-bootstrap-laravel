@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,11 +40,12 @@ Route::get('/ultimas-noticias',function(){
 
 Auth::routes();
 
-Route::group(['middlware' => ['auth']] , function(){
-    Route::get('admin/categories', function(){
-        $categorias = Category::all();
-        return view('categories',['categorias' => $categorias]);
-    });
+
+Route::group(['middleware'=>'auth'], function(){
+
+    Route::resource('admin/category',
+        CategoryController::class
+    )->name('*','admin.category');
 
 });
 

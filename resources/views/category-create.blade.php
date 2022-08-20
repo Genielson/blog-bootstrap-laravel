@@ -4,7 +4,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+
 @stop
 
 @section('content')
@@ -14,14 +14,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-primary">
+
                         <div class="card-header">
-                            <h3 class="card-title">Nova categoria <small>jQuery Validation</small></h3>
+                            <h3 class="card-title">Nova categoria </h3>
                         </div>
-                        
-                        <form id="quickForm" novalidate="novalidate">
+
+                        <form method="post" action="{{route('admin.category')}}">
                             @csrf
                             <div class="card-body">
-
                                 <div class="form-group">
                                     <label>Nome </label>
                                     <input type="text" name="category" class="form-control" placeholder="Nova categoria">
