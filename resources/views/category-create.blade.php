@@ -19,14 +19,20 @@
                             <h3 class="card-title">Nova categoria </h3>
                         </div>
 
-                        <form method="post" action="{{route('admin.category')}}">
+                        <form method="post" action="{{route('category.store')}}">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
+
                                     <label>Nome </label>
                                     <input type="text" name="category" class="form-control" placeholder="Nova categoria">
+                                    <span style="color: red">
+                                    {{
+                                          $errors->has('category') ? $errors->first('category')
+                                          : ''
+                                    }}
+                                    </span>
                                 </div>
-
                             </div>
 
                             <div class="card-footer">
