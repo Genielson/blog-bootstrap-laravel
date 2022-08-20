@@ -21,7 +21,14 @@
                 <tr>
                     <td> {{$categoria['title']}}</td>
                     <td> <a href="{{route('category.edit',['category'=> $categoria->id])}}" class="btn btn-success"> Editar </a></td>
-                    <td> <a href="{{route('category.destroy',['category' => $categoria->id])}}" class="btn btn-danger"> Deletar </a></td>
+                    <td> <form method="post" action="{{route('category.destroy',['category' => $categoria->id])}}" >
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit">
+                                Deletar
+                            </button>
+                        </form>
+                    </td>
                 </tr>
         @endforeach
 
