@@ -82,7 +82,21 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $regras = [
+           'category' => 'required|min:1|max:20'
+        ];
+        $feedback = [
+            'category.required' => 'O titulo precisa ser preenchido',
+            'category.min' => 'O titulo precisa ter no minimo 1 caractere',
+            'category.max' => 'O titulo precisa ter no máximo 20 caracteres '
+        ];
+        $request->validate($regras,$feedback);
+        $categoria = Category::findOrFail($id);
+        $categoria->title = $request->input('category');
+        $categoria->save();
+        return redirect()->route('category.index');
+
     }
 
     /**

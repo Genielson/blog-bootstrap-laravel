@@ -19,8 +19,10 @@
                             <h3 class="card-title">Editar categoria </h3>
                         </div>
 
-                        <form method="PUT" action="{{route('category.update',['category'=>$categoria->id])}}">
+                        <form method="post" action="{{route('category.update',['category'=>$categoria->id])}}">
                             @csrf
+                            @method('PUT')
+
                             <div class="card-body">
                                 <div class="form-group">
 
