@@ -247,7 +247,7 @@ return [
 
         [
             'text'        => 'Usuários',
-            'url'         => 'admin/pages',
+            'url'         => 'admin/users',
             'icon'        => 'far fa-fw fa-file',
             'label'       => 4,
             'label_color' => 'success',

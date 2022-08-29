@@ -47,7 +47,14 @@ Route::group(['middleware'=>'auth'], function(){
         CategoryController::class
     )->name('*','admin.category');
 
+    Route::resource('admin/posts',
+        \App\Http\Controllers\PostController::class
+    )->name('*','admin.posts');
+
 });
+
+
+
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
