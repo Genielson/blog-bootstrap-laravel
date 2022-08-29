@@ -256,13 +256,13 @@ return [
 
         [
             'text' => 'Posts',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/posts',
             'icon' => 'fas fa-fw fa-user',
         ],
 
         [
             'text' => 'Categorias',
-            'url'  => 'admin/categories',
+            'url'  => 'admin/category',
             'icon' => 'fas fa-fw fa-lock',
         ],
 

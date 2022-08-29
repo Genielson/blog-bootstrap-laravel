@@ -74,10 +74,12 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+
 @stop
 
 @section('js')
     <script> console.log('Hi!'); </script>
+    <script src="//cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
 @stop
 
 
