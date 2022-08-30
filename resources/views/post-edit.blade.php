@@ -19,7 +19,7 @@
                             <h3 class="card-title">Editar Post </h3>
                         </div>
 
-                        <form method="post" action="{{route('posts.store')}}" enctype="multipart/form-data">
+                        <form method="post" action="{{route('posts.update',['post'=>$post['id']])}}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group m-2">
                                 <label for="title">Titulo </label>

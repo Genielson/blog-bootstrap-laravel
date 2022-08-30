@@ -65,7 +65,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('post-edit',['post'=>$post]);
     }
 
     /**
