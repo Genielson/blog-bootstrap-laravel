@@ -26,9 +26,19 @@
                                 <label for="title">Titulo </label>
                                 <input type="text" class="form-control" name="title"  placeholder="Meu titulo">
                             </div>
+
+                            <div class="form-group m-2">
+                                <label for="category">Categoria </label>
+                                <select class="form-select form-control" name="category" aria-label="Default select example">
+                                    @foreach ($categorias as $categoria )
+                                            <option value="{{$categoria['id']}}">{{$categoria['title']}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <div class="form-group">
                                 <textarea class="ckeditor form-control" name="description"></textarea>
-                            </div>
+                             </div>
                             <button class="btn btn-success" type="submit"> Salvar </button>
                         </form>
 
