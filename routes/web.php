@@ -51,6 +51,8 @@ Route::group(['middleware'=>'auth'], function(){
         \App\Http\Controllers\PostController::class
     )->name('*','admin.posts');
 
+
+
 });
 
 

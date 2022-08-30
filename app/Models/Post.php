@@ -10,7 +10,7 @@ use App\Models\Category;
 class Post extends Model
 {
     use HasFactory;
-    protected $fillable = ['description','user_id'];
+    protected $fillable = ['description','title','user_id'];
 
     function user(){
         return $this->belongsTo(User::class,'user_id');

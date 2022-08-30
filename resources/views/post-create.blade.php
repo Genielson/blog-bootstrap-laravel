@@ -20,12 +20,18 @@
                         </div>
 
 
-                        <form method="post" action="" enctype="multipart/form-data">
+                        <form method="post" action="{{route('posts.store')}}" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-group">
-                                <textarea class="ckeditor form-control" name="wysiwyg-editor"></textarea>
+                            <div class="form-group m-2">
+                                <label for="title">Titulo </label>
+                                <input type="text" class="form-control" name="title"  placeholder="Meu titulo">
                             </div>
+                            <div class="form-group">
+                                <textarea class="ckeditor form-control" name="description"></textarea>
+                            </div>
+                            <button class="btn btn-success" type="submit"> Salvar </button>
                         </form>
+
 
 
                     </div>
@@ -54,6 +60,10 @@
         $(document).ready(function () {
             $('.ckeditor').ckeditor();
         });
+    </script>
+
+    <script type="text/javascript">
+
     </script>
 @stop
 

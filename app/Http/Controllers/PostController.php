@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     /**
@@ -24,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post-create');
     }
 
     /**
@@ -35,7 +36,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $id = Auth::user()->id;
+        $post = new Post();
+        $post->title = $request->input("title");
+        $post->description = $request->input("wysiwyg-editor");
+        $post->user_id = $id;
+        $post->save();
+        return redirect('/admin/posts');
     }
 
     /**
