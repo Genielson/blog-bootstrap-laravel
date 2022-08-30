@@ -40,7 +40,7 @@ class PostController extends Controller
         $id = Auth::user()->id;
         $post = new Post();
         $post->title = $request->input("title");
-        $post->description = $request->input("wysiwyg-editor");
+        $post->description = $request->input("description");
         $post->user_id = $id;
         $post->save();
         return redirect('/admin/posts');
@@ -78,7 +78,14 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        $post->fill(
+            [
+                'title'=>$request->input('title'),
+                'description' => $request->input('description')
+        ]);
+        $post->save();
+        return redirect('/admin/posts');
     }
 
     /**

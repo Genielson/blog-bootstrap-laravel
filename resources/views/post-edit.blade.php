@@ -21,6 +21,7 @@
 
                         <form method="post" action="{{route('posts.update',['post'=>$post['id']])}}" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="form-group m-2">
                                 <label for="title">Titulo </label>
                                 <input type="text" class="form-control" name="title" value="{{$post['title']}}"  placeholder="Meu titulo">
