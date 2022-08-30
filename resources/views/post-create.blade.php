@@ -19,12 +19,16 @@
                             <h3 class="card-title">Novo Post </h3>
                         </div>
 
-
                         <form method="post" action="{{route('posts.store')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group m-2">
                                 <label for="title">Titulo </label>
                                 <input type="text" class="form-control" name="title"  placeholder="Meu titulo">
+                            </div>
+
+                            <div class="form-group m-2">
+                                <label for="slug">Slug </label>
+                                <input type="text" class="form-control" name="slug"  placeholder="/meu-post">
                             </div>
 
                             <div class="form-group m-2">
@@ -35,6 +39,8 @@
                                     @endforeach
                                 </select>
                             </div>
+
+
 
                             <div class="form-group">
                                 <textarea class="ckeditor form-control" name="description"></textarea>
