@@ -32,6 +32,18 @@
                             </div>
 
                             <div class="form-group m-2">
+                                <label for="slug">Categoria </label>
+                                    @foreach($categorias as $categoria)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="categoria[]"  value="{{$categoria['id']}}" id="gridCheck">
+                                            <label class="form-check-label" for="gridCheck">
+                                                {{$categoria['title']}}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                            </div>
+
+                            <div class="form-group m-2">
                                 <label for="category">Categoria </label>
                                 <select class="form-select form-control" name="category" aria-label="Default select example">
                                     @foreach ($categorias as $categoria )
@@ -39,8 +51,6 @@
                                     @endforeach
                                 </select>
                             </div>
-
-
 
                             <div class="form-group">
                                 <textarea class="ckeditor form-control" name="description"></textarea>

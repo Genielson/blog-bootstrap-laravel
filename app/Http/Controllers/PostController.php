@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\PostCategory;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
@@ -39,12 +40,21 @@ class PostController extends Controller
     public function store(Request $request)
     {
 
+        $allInputs = $request->all();
         $id = Auth::user()->id;
         $post = new Post();
         $post->title = $request->input("title");
         $post->description = $request->input("description");
         $post->user_id = $id;
         $post->save();
+
+        foreach ($allInputs['categoria'] as $categoria){
+            $postCategory = new PostCategory();
+            $postCategory->category_id = $categoria;
+            $postCategory->post_id = $post->id;
+            $postCategory->save();
+        }
+
         return redirect('/admin/posts');
     }
 
