@@ -129,6 +129,8 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $post->delete();
+        $postCategory = PostCategory::where('post_id','=',$id);
+        $postCategory->delete();
         return redirect('/admin/posts');
     }
 }
