@@ -26,6 +26,12 @@
                                 <label for="title">Titulo </label>
                                 <input type="text" class="form-control" name="title" value="{{$post['title']}}"  placeholder="Meu titulo">
                             </div>
+
+                            <div class="form-group m-2">
+                                <label for="slug">Slug </label>
+                                <input type="text" class="form-control" name="slug"  placeholder="/meu-post">
+                            </div>
+
                             <div class="form-group">
                                 <textarea class="ckeditor form-control" name="description"> {{$post['description']}}</textarea>
                             </div>
