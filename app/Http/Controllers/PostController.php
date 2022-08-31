@@ -99,6 +99,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $allInputs = $request->all();
         $post = Post::find($id);
         $post->fill(
             [
@@ -107,6 +108,14 @@ class PostController extends Controller
                 'slug' => $request->input('slug')
         ]);
         $post->save();
+        $postCategory = PostCategory::where('post_id','=',$id);
+        $postCategory->delete();
+        foreach ($allInputs['categoria'] as $categoria){
+            $postCategory = new PostCategory();
+            $postCategory->category_id = $categoria;
+            $postCategory->post_id = $post->id;
+            $postCategory->save();
+        }
         return redirect('/admin/posts');
     }
 
