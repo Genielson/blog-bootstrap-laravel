@@ -103,7 +103,8 @@ class PostController extends Controller
         $post->fill(
             [
                 'title'=>$request->input('title'),
-                'description' => $request->input('description')
+                'description' => $request->input('description'),
+                'slug' => $request->input('slug')
         ]);
         $post->save();
         return redirect('/admin/posts');
