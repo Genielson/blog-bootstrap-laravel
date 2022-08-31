@@ -78,7 +78,15 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        return view('post-edit',['post'=>$post]);
+        $categorias = Category::all();
+        $categoriasDoPost = PostCategory::select('category_id')->
+        where('post_id', "=",$id)->pluck('category_id')->toArray();
+
+        return view(
+            'post-edit', ['post'=>$post, 'categorias' => $categorias,
+            'categoriasDoPost' => $categoriasDoPost
+            ]
+        );
     }
 
     /**

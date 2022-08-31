@@ -32,6 +32,19 @@
                                 <input type="text" class="form-control" name="slug"  placeholder="/meu-post">
                             </div>
 
+
+                            <div class="form-group m-2">
+                                <label for="slug">Categoria </label>
+                                @foreach($categorias as $categoria)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" {{(in_array($categoria['id'],$categoriasDoPost)) ? "checked" : "" }}  name="categoria[]"  value="{{$categoria['id']}}" id="gridCheck">
+                                        <label class="form-check-label" for="gridCheck"  >
+                                            {{$categoria['title']}}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+
                             <div class="form-group">
                                 <textarea class="ckeditor form-control" name="description"> {{$post['description']}}</textarea>
                             </div>
