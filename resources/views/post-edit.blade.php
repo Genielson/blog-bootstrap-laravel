@@ -32,6 +32,11 @@
                                 <input type="text" class="form-control" name="slug"  placeholder="/meu-post">
                             </div>
 
+                            <div class="form-group m-2">
+                                <label for="slug">Imagem destaque </label>
+                                <input required type="file"  class="form-control" name="image" >
+                            </div>
+
 
                             <div class="form-group m-2">
                                 <label for="slug">Categoria </label>

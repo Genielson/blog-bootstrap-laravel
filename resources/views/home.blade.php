@@ -56,8 +56,8 @@
 
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3></h3>
-                    <p>Total de Visitantes </p>
+                    <h3>{{$totalVisitantes}}</h3>
+                    <p>Total de Visitas </p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>

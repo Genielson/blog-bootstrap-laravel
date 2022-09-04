@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+
 class PostController extends Controller
 {
     /**
@@ -39,13 +40,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
         $allInputs = $request->all();
         $id = Auth::user()->id;
         $post = new Post();
         $post->title = $request->input("title");
         $post->description = $request->input("description");
-        $post->slug = $request->input("slug");
+        //$post->slug = $request->input("slug");
+        $image = $request->file('image');
+        $filename = date('YmdHi').$image->getClientOriginalName();
+        $image->move(public_path('public/image'),$filename);
+        $post->url_image = $filename;
         $post->user_id = $id;
         $post->save();
 
@@ -55,7 +59,6 @@ class PostController extends Controller
             $postCategory->post_id = $post->id;
             $postCategory->save();
         }
-
         return redirect('/admin/posts');
     }
 

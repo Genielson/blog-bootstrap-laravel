@@ -32,6 +32,11 @@
                             </div>
 
                             <div class="form-group m-2">
+                                <label for="slug">Imagem destaque </label>
+                                <input required type="file" class="form-control" name="image" >
+                            </div>
+
+                            <div class="form-group m-2">
                                 <label for="slug">Categoria </label>
                                     @foreach($categorias as $categoria)
                                         <div class="form-check">
