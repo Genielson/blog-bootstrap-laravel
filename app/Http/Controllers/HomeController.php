@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use App\Models\Category;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $totalPosts = Post::all()->count();
+        $totalUsuarios = User::all()->count();
+        $totalCategorias = Category::all()->count();
+
+        return view('home',[
+            'totalPosts'=>$totalPosts,
+            'totalUsuarios'=>$totalUsuarios,
+            'totalCategorias'=>$totalCategorias
+        ]);
     }
 }
