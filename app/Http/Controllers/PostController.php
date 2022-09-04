@@ -143,6 +143,8 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+        $file_path = public_path().'/public/image/'.$post->url_image;
+        File::delete($file_path);
         $post->delete();
         $postCategory = PostCategory::where('post_id','=',$id);
         $postCategory->delete();
