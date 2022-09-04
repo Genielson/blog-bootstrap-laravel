@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LogAccess extends Model
+class LogAccessUser extends Model
 {
     use HasFactory;
     protected $fillable = ['log'];
