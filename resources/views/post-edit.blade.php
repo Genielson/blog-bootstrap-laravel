@@ -32,6 +32,16 @@
                                 <input type="text" class="form-control" name="slug"  placeholder="/meu-post">
                             </div>
 
+                            @if($post->url_image != NULL)
+                                <div class="form-group m-2">
+                                    <img width="60%" height="60%" src="{{asset('public/image/'.$post->url_image)}}" alt="">
+                                </div>
+                            @else
+                                <div class="form-group m-2">
+                                   <h3 class="text-center"> Não foi inserida nenhuma imagem de destaque. </h3>
+                                </div>
+                            @endif
+
                             <div class="form-group m-2">
                                 <label for="slug">Imagem destaque </label>
                                 <input required type="file"  class="form-control" name="image" >
