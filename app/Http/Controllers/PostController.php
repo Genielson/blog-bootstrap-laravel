@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -46,6 +47,7 @@ class PostController extends Controller
         $post->title = $request->input("title");
         $post->description = $request->input("description");
         //$post->slug = $request->input("slug");
+
         $image = $request->file('image');
         $filename = date('YmdHi').$image->getClientOriginalName();
         $image->move(public_path('public/image'),$filename);
@@ -102,16 +104,26 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $allInputs = $request->all();
         $post = Post::find($id);
+        $file_path = public_path().'/public/image/'.$post->url_image;
+        File::delete($file_path);
+
+        $image = $request->file('image');
+        $filename = date('YmdHi').$image->getClientOriginalName();
+
+        $image->move(public_path('public/image'),$filename);
         $post->fill(
             [
                 'title'=>$request->input('title'),
                 'description' => $request->input('description'),
                 'slug' => $request->input('slug')
         ]);
+        $post->url_image = $filename;
         $post->save();
         $postCategory = PostCategory::where('post_id','=',$id);
+
         $postCategory->delete();
         foreach ($allInputs['categoria'] as $categoria){
             $postCategory = new PostCategory();
