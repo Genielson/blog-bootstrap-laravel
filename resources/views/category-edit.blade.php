@@ -19,7 +19,7 @@
                             <h3 class="card-title">Editar categoria </h3>
                         </div>
 
-                        <form method="post" action="{{route('category.update',['category'=>$categoria->id])}}">
+                        <form method="post" enctype="multipart/form-data" action="{{route('category.update',['category'=>$categoria->id])}}">
                             @csrf
                             @method('PUT')
 

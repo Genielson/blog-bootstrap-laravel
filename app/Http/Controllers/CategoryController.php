@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\File;
+
 class CategoryController extends Controller
 {
     /**
@@ -101,6 +103,14 @@ class CategoryController extends Controller
         ];
         $request->validate($regras,$feedback);
         $categoria = Category::findOrFail($id);
+
+        $file_path = public_path().'/public/image/'.$categoria->url_image;
+        File::delete($file_path);
+
+        $image = $request->file('image');
+        $filename = date('YmdHi').$image->getClientOriginalName();
+        $image->move(public_path('public/image'),$filename);
+        $categoria->url_image = $filename;
         $categoria->title = $request->input('category');
         $categoria->save();
         return redirect()->route('category.index');
