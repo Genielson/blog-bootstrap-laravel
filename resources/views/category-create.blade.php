@@ -19,7 +19,7 @@
                             <h3 class="card-title">Nova categoria </h3>
                         </div>
 
-                        <form method="post" action="{{route('category.store')}}">
+                        <form method="post" action="{{route('category.store')}}" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -33,6 +33,12 @@
                                     }}
                                     </span>
                                 </div>
+
+                                <div class="form-group m-2">
+                                    <label for="slug">Imagem destaque </label>
+                                    <input required type="file" class="form-control" name="image" >
+                                </div>
+
                             </div>
 
                             <div class="card-footer">

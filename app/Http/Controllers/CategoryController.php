@@ -36,6 +36,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
 
+
         $regras = ['category' => 'required|min:1|max:20'];
         $feedback = [
             'category.required' => 'O campo Nome deve ser preenchido',
@@ -46,6 +47,12 @@ class CategoryController extends Controller
         $request->validate($regras,$feedback);
         $category = new Category();
         $category->title = $request->input('category');
+
+        $image = $request->file('image');
+        $filename = date('YmdHi').$image->getClientOriginalName();
+        $image->move(public_path('public/image'),$filename);
+        $category->url_image = $filename;
+
         $category->save();
         return redirect()->route('category.index');
     }
