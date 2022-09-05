@@ -127,6 +127,8 @@ class CategoryController extends Controller
     {
 
         $categoria = Category::findOrFail($id);
+        $file_path = public_path().'/public/image/'.$categoria->url_image;
+        File::delete($file_path);
         $categoria->delete();
         return redirect()->route('category.index');
     }
