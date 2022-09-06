@@ -14,11 +14,14 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/inicio', function(){
+
+Route::get('/', function(){
+
+    $categorias = Category::all();
+    $posts = Post::all();
+
+
     return view('site.home');
 })->name('home');
 

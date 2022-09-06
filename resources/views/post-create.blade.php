@@ -48,15 +48,6 @@
                                     @endforeach
                             </div>
 
-                            <div class="form-group m-2">
-                                <label for="category">Categoria </label>
-                                <select class="form-select form-control" name="category" aria-label="Default select example">
-                                    @foreach ($categorias as $categoria )
-                                            <option value="{{$categoria['id']}}">{{$categoria['title']}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
                             <div class="form-group">
                                 <textarea class="ckeditor form-control" name="description"></textarea>
                              </div>
