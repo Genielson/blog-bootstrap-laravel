@@ -9,18 +9,7 @@
                 <!-- Trending Tittle -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="trending-tittle">
-                            <strong>Trending now</strong>
-                            <!-- <p>Rem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
-                            <div class="trending-animated">
-                                <ul id="js-news" class="js-hidden">
-                                    <li class="news-item">Bangladesh dolor sit amet, consectetur adipisicing elit.</li>
-                                    <li class="news-item">Spondon IT sit amet, consectetur.......</li>
-                                    <li class="news-item">Rem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                                </ul>
-                            </div>
 
-                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -37,7 +26,11 @@
                         </div>
                         <!-- Trending Bottom -->
                         <div class="trending-bottom">
+                            <h3> Recentes </h3> <br><br>
                             <div class="row">
+
+
+
                                 <div class="col-lg-4">
                                 <div class="single-bottom mb-35">
                                     <div class="trend-bottom-img mb-30">
@@ -49,6 +42,7 @@
                                     </div>
                                 </div>
                                 </div>
+
                                 <div class="col-lg-4">
                                     <div class="single-bottom mb-35">
                                         <div class="trend-bottom-img mb-30">
@@ -144,16 +138,7 @@
                     <div class="col-lg-9 col-md-9">
                         <div class="properties__button">
                             <!--Nav Button  -->
-                            <nav>
-                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">All</a>
-                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Lifestyle</a>
-                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Travel</a>
-                                    <a class="nav-item nav-link" id="nav-last-tab" data-toggle="tab" href="#nav-last" role="tab" aria-controls="nav-contact" aria-selected="false">Fashion</a>
-                                    <a class="nav-item nav-link" id="nav-Sports" data-toggle="tab" href="#nav-nav-Sport" role="tab" aria-controls="nav-contact" aria-selected="false">Sports</a>
-                                    <a class="nav-item nav-link" id="nav-technology" data-toggle="tab" href="#nav-techno" role="tab" aria-controls="nav-contact" aria-selected="false">Technology</a>
-                                </div>
-                            </nav>
+
                             <!--End Nav Button  -->
                         </div>
                     </div>
@@ -538,7 +523,7 @@
 
     <!--Recent Articles End -->
     <!--Start pagination -->
-    
+
     <!-- End pagination  -->
     </main>
 
