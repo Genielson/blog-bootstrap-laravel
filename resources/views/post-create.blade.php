@@ -31,6 +31,13 @@
                                 <input type="text" class="form-control" name="slug"  placeholder="/meu-post">
                             </div>
 
+                            <div class="form-check m-2 mt-5">
+                                <input class="form-check-input" type="checkbox" name="emphasis" value="emphasis" {{ $destaque != NULL ? "checked" : ""  }} >
+                                <label class="form-check-label" for="gridCheck">
+                                    Destaque do blog
+                                </label>
+                            </div>
+
                             <div class="form-group m-2">
                                 <label for="slug">Imagem destaque </label>
                                 <input required type="file" class="form-control" name="image" >
@@ -48,13 +55,7 @@
                                     @endforeach
                             </div>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="destaque" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                    Destaque do blog
-                                </label>
-                            </div>
-
+                            
                             <div class="form-group">
                                 <textarea class="ckeditor form-control" name="description"></textarea>
                              </div>
