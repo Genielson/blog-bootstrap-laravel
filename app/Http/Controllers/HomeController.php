@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\LogAccess;
+use Illuminate\Support\Facades\DB;
 use App\Models\LogAccessUser;
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -28,6 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $totalPosts = Post::all()->count();
         $totalUsuarios = User::all()->count();
         $totalCategorias = Category::all()->count();

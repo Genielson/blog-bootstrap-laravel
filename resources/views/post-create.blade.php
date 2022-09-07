@@ -32,7 +32,7 @@
                             </div>
 
                             <div class="form-check m-2 mt-5">
-                                <input class="form-check-input" type="checkbox" name="emphasis" value="emphasis" {{ $destaque != NULL ? "checked" : ""  }} >
+                                <input class="form-check-input" type="checkbox" name="emphasis" value="emphasis"  >
                                 <label class="form-check-label" for="gridCheck">
                                     Destaque do blog
                                 </label>
@@ -55,7 +55,7 @@
                                     @endforeach
                             </div>
 
-                            
+
                             <div class="form-group">
                                 <textarea class="ckeditor form-control" name="description"></textarea>
                              </div>

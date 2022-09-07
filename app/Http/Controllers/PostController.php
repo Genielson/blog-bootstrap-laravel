@@ -44,23 +44,12 @@ class PostController extends Controller
     {
         $allInputs = $request->all();
         $VALUE_ID_UPDATE = 1;
-
         $id = Auth::user()->id;
         $post = new Post();
 
         $post->title = $request->input("title");
         $post->description = $request->input("description");
         $post->slug = $request->input("slug");
-        $emphasis = Emphasis::all();
-        if(count($emphasis) == 0){
-            $newEmphasis = new Emphasis();
-            $newEmphasis->post_id = $id;
-            $newEmphasis->save();
-        }else{
-            $emphasis = Emphasis::find($VALUE_ID_UPDATE);
-            $emphasis->post_id = $id;
-            $emphasis->save();
-        }
 
         $image = $request->file('image');
         if($image != NULL) {
@@ -71,6 +60,16 @@ class PostController extends Controller
         $post->user_id = $id;
         $post->save();
 
+        $emphasis = Emphasis::all();
+        if(count($emphasis) == 0){
+            $newEmphasis = new Emphasis();
+            $newEmphasis->post_id = $post->id;
+            $newEmphasis->save();
+        }else{
+            $emphasis = Emphasis::find($VALUE_ID_UPDATE);
+            $emphasis->post_id = $post->id;
+            $emphasis->save();
+        }
 
         foreach ($allInputs['categoria'] as $categoria){
             $postCategory = new PostCategory();
