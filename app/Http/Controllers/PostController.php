@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Emphasis;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\PostCategory;
@@ -42,8 +43,10 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $allInputs = $request->all();
+
         $id = Auth::user()->id;
         $post = new Post();
+
         $post->title = $request->input("title");
         $post->description = $request->input("description");
         $post->slug = $request->input("slug");
@@ -56,6 +59,7 @@ class PostController extends Controller
         }
         $post->user_id = $id;
         $post->save();
+
 
         foreach ($allInputs['categoria'] as $categoria){
             $postCategory = new PostCategory();
@@ -85,14 +89,17 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+
         $post = Post::findOrFail($id);
         $categorias = Category::all();
+        $emphasis = Emphasis::select()->where('post_id','=',$id)->get()->toArray();
         $categoriasDoPost = PostCategory::select('category_id')->
         where('post_id', "=",$id)->pluck('category_id')->toArray();
 
         return view(
             'post-edit', ['post'=>$post, 'categorias' => $categorias,
-            'categoriasDoPost' => $categoriasDoPost
+            'categoriasDoPost' => $categoriasDoPost,
+                'destaque'=>$emphasis
             ]
         );
     }
@@ -107,9 +114,21 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
 
-        $allInputs = $request->all();
 
+        $allInputs = $request->all();
+        $VALUE_ID_UPDATE = 1;
         $post = Post::find($id);
+        $emphasis = Emphasis::all();
+
+        if(count($emphasis) == 0){
+            $newEmphasis = new Emphasis();
+            $newEmphasis->post_id = $id;
+            $newEmphasis->save();
+        }else{
+            $emphasis = Emphasis::find($VALUE_ID_UPDATE);
+            $emphasis->post_id = $id;
+            $emphasis->save();
+        }
         $image = $request->file('image');
         $post->fill(
             [

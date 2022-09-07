@@ -9,8 +9,9 @@ use App\Models\Post;
 class Emphasis extends Model
 {
     use HasFactory;
-    protected $fillable = ['post_id'];
 
+    protected $fillable = ['post_id'];
+    protected $table = 'emphasis';
     function post(){
             return $this->belongsTo(Post::class,'post_id');
     }

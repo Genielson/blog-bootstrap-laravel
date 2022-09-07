@@ -48,6 +48,13 @@
                                     @endforeach
                             </div>
 
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="destaque" id="gridCheck">
+                                <label class="form-check-label" for="gridCheck">
+                                    Destaque do blog
+                                </label>
+                            </div>
+
                             <div class="form-group">
                                 <textarea class="ckeditor form-control" name="description"></textarea>
                              </div>

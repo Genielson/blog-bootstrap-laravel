@@ -33,14 +33,21 @@
                             </div>
 
                             @if($post->url_image != NULL)
-                                <div class="form-group m-2">
+                                <div class="form-group m-2 mt-5">
                                     <img width="60%" height="60%" src="{{asset('public/image/'.$post->url_image)}}" alt="">
                                 </div>
                             @else
-                                <div class="form-group m-2">
+                                <div class="form-group m-2 ">
                                    <h3 class="text-center"> Não foi inserida nenhuma imagem de destaque. </h3>
                                 </div>
                             @endif
+
+                            <div class="form-check m-2 mt-5">
+                                <input class="form-check-input" type="checkbox" name="emphasis" value="emphasis" {{ $destaque != NULL ? "checked" : ""  }} >
+                                <label class="form-check-label" for="gridCheck">
+                                    Destaque do blog
+                                </label>
+                            </div>
 
                             <div class="form-group m-2">
                                 <label for="slug">Imagem destaque </label>
@@ -59,6 +66,8 @@
                                     </div>
                                 @endforeach
                             </div>
+
+
 
                             <div class="form-group">
                                 <textarea class="ckeditor form-control" name="description"> {{$post['description']}}</textarea>
