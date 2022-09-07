@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
+use App\Models\Post;
 use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,11 @@ Route::get('/', function(){
     $categorias = Category::all();
     $posts = Post::all();
 
+    return view('site.home',[
+        'categorias'=>$categorias,
+        'posts'=>$posts
+    ]);
 
-    return view('site.home');
 })->name('home');
 
 Route::get('/categorias',function(){

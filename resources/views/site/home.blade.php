@@ -70,51 +70,24 @@
                     </div>
                     <!-- Riht content -->
                     <div class="col-lg-4">
+
+                        @foreach($categorias as $categoria)
+
                         <div class="trand-right-single d-flex">
                             <div class="trand-right-img">
-                                <img src="{{asset('assets/img/trending/right1.jpg')}}" alt="">
+                                <img width="120px" height="100px" src="{{asset('public/image/'.$categoria['url_image'])}}" alt="">
                             </div>
                             <div class="trand-right-cap">
                                 <span class="color1">Concert</span>
-                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
+                                <h4><a href="details.html">{{$categoria['title']}}</a></h4>
                             </div>
                         </div>
-                        <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="{{asset('assets/img/trending/right2.jpg')}}" alt="">
-                            </div>
-                            <div class="trand-right-cap">
-                                <span class="color3">sea beach</span>
-                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
-                            </div>
-                        </div>
-                        <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="{{asset('assets/img/trending/right3.jpg')}}" alt="">
-                            </div>
-                            <div class="trand-right-cap">
-                                <span class="color2">Bike Show</span>
-                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
-                            </div>
-                        </div>
-                        <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="{{asset('assets/img/trending/right4.jpg')}}" alt="">
-                            </div>
-                            <div class="trand-right-cap">
-                                <span class="color4">See beach</span>
-                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
-                            </div>
-                        </div>
-                        <div class="trand-right-single d-flex">
-                            <div class="trand-right-img">
-                                <img src="{{asset('assets/img/trending/right5.jpg')}}" alt="">
-                            </div>
-                            <div class="trand-right-cap">
-                                <span class="color1">Skeping</span>
-                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
-                            </div>
-                        </div>
+
+                        @endforeach
+
+
+
+
                     </div>
                 </div>
             </div>
