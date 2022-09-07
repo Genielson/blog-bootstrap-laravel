@@ -49,9 +49,11 @@ class PostController extends Controller
         $post->slug = $request->input("slug");
 
         $image = $request->file('image');
-        $filename = date('YmdHi').$image->getClientOriginalName();
-        $image->move(public_path('public/image'),$filename);
-        $post->url_image = $filename;
+        if($image != NULL) {
+            $filename = date('YmdHi') . $image->getClientOriginalName();
+            $image->move(public_path('public/image'), $filename);
+            $post->url_image = $filename;
+        }
         $post->user_id = $id;
         $post->save();
 
@@ -106,24 +108,26 @@ class PostController extends Controller
     {
 
         $allInputs = $request->all();
+
         $post = Post::find($id);
-        $file_path = public_path().'/public/image/'.$post->url_image;
-        File::delete($file_path);
-
         $image = $request->file('image');
-        $filename = date('YmdHi').$image->getClientOriginalName();
-
-        $image->move(public_path('public/image'),$filename);
         $post->fill(
             [
                 'title'=>$request->input('title'),
-                'description' => $request->input('description'),
-                'slug' => $request->input('slug')
+                'description' => $request->input('description')
+
         ]);
-        $post->url_image = $filename;
+        $post->slug = $allInputs['slug'];
+        if ($image != NULL) {
+            $file_path = public_path() . '/public/image/' . $post->url_image;
+            File::delete($file_path);
+            $filename = date('YmdHi') . $image->getClientOriginalName();
+            $image->move(public_path('public/image'), $filename);
+            $post->url_image = $filename;
+        }
+
         $post->save();
         $postCategory = PostCategory::where('post_id','=',$id);
-
         $postCategory->delete();
         foreach ($allInputs['categoria'] as $categoria){
             $postCategory = new PostCategory();

@@ -29,7 +29,7 @@
 
                             <div class="form-group m-2">
                                 <label for="slug">Slug </label>
-                                <input type="text" class="form-control" name="slug"  placeholder="/meu-post">
+                                <input type="text" class="form-control" name="slug" value="{{$post['slug']}}"  placeholder="/meu-post">
                             </div>
 
                             @if($post->url_image != NULL)
@@ -44,7 +44,7 @@
 
                             <div class="form-group m-2">
                                 <label for="slug">Imagem destaque </label>
-                                <input required type="file"  class="form-control" name="image" >
+                                <input  type="file"  class="form-control" name="image" >
                             </div>
 
 
