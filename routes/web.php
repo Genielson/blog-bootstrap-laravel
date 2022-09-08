@@ -44,7 +44,6 @@ Route::get('/sobre',function(){
 Route::get('/ultimas-noticias',function(){
 
     $posts = Post::orderBy('id','desc')->paginate(5);
-
     return view('site.last-news',
         compact('posts')
     );
@@ -66,9 +65,5 @@ Route::group(['middleware'=>'auth'], function(){
 
 
 });
-
-
-
-
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
