@@ -55,7 +55,6 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a href="{{route('home')}}">Inicio</a></li>
-                                        <li><a href="{{route('categories')}}">Categorias</a></li>
                                         <li><a href="{{route('about')}}">Sobre nós</a></li>
                                         <li><a href="{{route('last-news')}}">Ultimas notícias</a></li>
                                         <li><a href="{{route('contact')}}">Contato</a></li>

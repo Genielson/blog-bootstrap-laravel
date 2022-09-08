@@ -42,7 +42,12 @@ Route::get('/sobre',function(){
 })->name('about');
 
 Route::get('/ultimas-noticias',function(){
-    return view('site.last-news');
+
+    $posts = Post::orderBy('id','desc')->paginate(5);
+
+    return view('site.last-news',
+        compact('posts')
+    );
 })->name('last-news');
 
 Auth::routes();
