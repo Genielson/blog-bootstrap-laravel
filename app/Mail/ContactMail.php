@@ -9,6 +9,9 @@ use Illuminate\Queue\SerializesModels;
 
 class ContactMail extends Mailable
 {
+
+    public $user;
+
     use Queueable, SerializesModels;
 
     /**
@@ -16,9 +19,9 @@ class ContactMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -28,6 +31,6 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.welcome');
+        return $this->view('mail.welcome',['user' => $user]);
     }
 }

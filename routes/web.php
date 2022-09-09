@@ -38,12 +38,12 @@ Route::get('/contato',function(){
     return view('site.contact');
 })->name('contact');
 
-
 Route::post('/envia-email-contato', function(){
 
+    //Mail::send(new ContactMail('myUser'));
 
-
-
+    Session::flash('message', 'Email enviado com sucesso! ');
+    return redirect()->route('contact');
 
 })->name('contact-send');
 

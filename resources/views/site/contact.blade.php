@@ -5,8 +5,15 @@
     <div class="row">
         <div class="col-12">
             <h2 class="contact-title">Get in Touch</h2>
+
+            @if(Session::has('message'))
+                <p class="alert text-center alert-info"> {{Session::get('message')}} </p>
+            @endif
+
         </div>
         <div class="col-lg-8">
+
+
 
             <div class="col-md-9 mb-md-0 mb-5">
                 <form id="contact-form" name="contact-form" action="{{route('contact-send')}}" method="POST">
