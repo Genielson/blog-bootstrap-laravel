@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
 use App\Models\Post;
+use App\Mail\ContactMail;
 use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,15 @@ Route::get('/categorias',function(){
 Route::get('/contato',function(){
     return view('site.contact');
 })->name('contact');
+
+
+Route::post('/envia-email-contato', function(){
+
+
+
+
+
+})->name('contact-send');
 
 Route::get('/sobre',function(){
    return view('site.about');
