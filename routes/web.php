@@ -21,7 +21,7 @@ use App\Http\Controllers\CategoryController;
 Route::get('/', function(){
 
     $categorias = Category::all();
-    $posts = Post::all();
+    $posts = Post::limit(4)->get();
     $postsRecentes = Post::orderBy('created_at','desc')->limit(3)->get();
     $postPrincipal  = DB::table('emphasis')->join('posts','emphasis.post_id','=','posts.id')->get();
 
