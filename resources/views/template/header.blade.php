@@ -31,7 +31,7 @@
                         <!-- Logo -->
                         <div class="col-xl-3 col-lg-3 col-md-3">
                             <div class="logo">
-                                <a href="index.html"><img style="width: 150px;height: 100px;" src="{{asset('assets/img/logo/php.png')}}" alt=""></a>
+                                <a href="{{route('home')}}"><img style="width: 150px;height: 100px;" src="{{asset('assets/img/logo/php.png')}}" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-9 col-lg-9 col-md-9">
@@ -48,17 +48,16 @@
                         <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
                             <!-- sticky -->
                                 <div class="sticky-logo">
-                                    <a href="index.html"><img src="{{asset('assets/img/logo/logo.png')}}" alt=""></a>
+                                    <a href="{{route('home')}}"><img src="{{asset('assets/img/logo/logo.png')}}" alt=""></a>
                                 </div>
                             <!-- Main-menu -->
                             <div class="main-menu d-none d-md-block">
                                 <nav>
                                     <ul id="navigation">
                                         <li><a href="{{route('home')}}">Inicio</a></li>
-                                        <li><a href="{{route('about')}}">Sobre nós</a></li>
                                         <li><a href="{{route('last-news')}}">Ultimas notícias</a></li>
                                         <li><a href="{{route('contact')}}">Contato</a></li>
-
+                                        <li><a href="{{route('about')}}">Sobre nós</a></li>
                                     </ul>
                                 </nav>
                             </div>

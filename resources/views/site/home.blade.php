@@ -34,11 +34,11 @@
                                 <div class="col-lg-4">
                                 <div class="single-bottom mb-35">
                                     <div class="trend-bottom-img mb-30">
-                                        <img src="{{asset('assets/img/trending/trending_bottom1.jpg')}}" alt="">
+                                        <img src="{{asset('public/image/'.$postsRecentes[0]['url_image'])}}" alt="">
                                     </div>
                                     <div class="trend-bottom-cap">
                                         <span class="color1">Lifestyple</span>
-                                        <h4><a href="details.html">Get the Illusion of Fuller Lashes by “Mascng.”</a></h4>
+                                        <h4><a href="details.html">{{$postsRecentes[0]['title']}}</a></h4>
                                     </div>
                                 </div>
                                 </div>
@@ -46,22 +46,22 @@
                                 <div class="col-lg-4">
                                     <div class="single-bottom mb-35">
                                         <div class="trend-bottom-img mb-30">
-                                            <img src="{{asset('assets/img/trending/trending_bottom2.jpg')}}" alt="">
+                                            <img src="{{asset('public/image/'.$postsRecentes[1]['url_image'])}}" alt="">
                                         </div>
                                         <div class="trend-bottom-cap">
                                             <span class="color2">Sports</span>
-                                            <h4><h4><a href="details.html">Get the Illusion of Fuller Lashes by “Mascng.”</a></h4></h4>
+                                            <h4><h4><a href="details.html">{{$postsRecentes[1]['title']}}</a></h4></h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="single-bottom mb-35">
                                         <div class="trend-bottom-img mb-30">
-                                            <img src="{{asset('assets/img/trending/trending_bottom3.jpg')}}" alt="">
+                                            <img src="{{asset('public/image/'.$postsRecentes[2]['url_image'])}}" alt="">
                                         </div>
                                         <div class="trend-bottom-cap">
                                             <span class="color3">Travels</span>
-                                            <h4><a href="details.html"> Welcome To The Best Model Winner Contest</a></h4>
+                                            <h4><a href="details.html"> {{$postsRecentes[2]['title']}}</a></h4>
                                         </div>
                                     </div>
                                 </div>
