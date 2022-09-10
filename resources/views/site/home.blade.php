@@ -17,10 +17,10 @@
                         <!-- Trending Top -->
                         <div class="trending-top mb-30">
                             <div class="trend-top-img">
-                                <img src="{{asset('assets/img/trending/trending_top.jpg')}}" alt="">
+                                <img src="{{asset('public/image/'.$postPrincipal[0]->url_image)}}" alt="">
                                 <div class="trend-top-cap">
                                     <span>Appetizers</span>
-                                    <h2><a href="details.html">Welcome To The Best Model Winner<br> Contest At Look of the year</a></h2>
+                                    <h2><a href="details.html">{{$postPrincipal[0]->title}}</a></h2>
                                 </div>
                             </div>
                         </div>
