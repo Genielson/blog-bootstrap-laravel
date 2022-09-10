@@ -13,8 +13,6 @@
         </div>
         <div class="col-lg-8">
 
-
-
             <div class="col-md-9 mb-md-0 mb-5">
                 <form id="contact-form" name="contact-form" action="{{route('contact-send')}}" method="POST">
                     @method('POST')
