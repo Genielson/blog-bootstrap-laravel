@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSiteRequest;
 use App\Http\Requests\UpdateSiteRequest;
 use App\Models\Site;
+use Illuminate\Http\Request;
+use Session;
 
 class SiteController extends Controller
 {
@@ -15,7 +17,22 @@ class SiteController extends Controller
      */
     public function index()
     {
-        //
+
+
+        $id = Site::limit(1)->get()->toArray();
+
+        if (count($id) == 0){
+            $id = 0;
+        }else{
+            $id = $id[0]['id'];
+        }
+
+        return view(
+            'admin-site',
+            [
+                'id' => $id
+            ]
+        );
     }
 
     /**
@@ -65,12 +82,30 @@ class SiteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateSiteRequest  $request
-     * @param  \App\Models\Site  $site
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateSiteRequest $request, Site $site)
+    public function update(Request $request, $id)
     {
-        //
+
+       $site = NULL;
+       if($id == 0){
+           $site = new Site();
+       }else{
+           $site = Site::findOrFail($id);
+       }
+
+        $site->title = $request->input('title');
+        $image = $request->file('image');
+        $filename = date('YmdHi').$image->getClientOriginalName();
+        $image->move(public_path('public/image'),$filename);
+        $site->url_image_logo = $filename;
+
+        $site->header_background = $request->input('header');
+        $site->footer_background = $request->input('footer');
+        $site->save();
+        Session::flash('message','Site atualizado com sucesso! ');
+        return redirect()->route('site.index');
     }
 
     /**

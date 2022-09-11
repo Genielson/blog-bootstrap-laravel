@@ -76,6 +76,10 @@ Route::group(['middleware'=>'auth'], function(){
         \App\Http\Controllers\PostController::class
     )->name('*','admin.posts');
 
+    Route::resource('admin/site',
+        \App\Http\Controllers\SiteController::class
+    )->name('*','admin.site');
+
 
 
 });

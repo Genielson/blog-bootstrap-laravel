@@ -267,6 +267,13 @@ return [
         ],
 
 
+        [
+            'text' => 'Aparencia',
+            'url'  => 'admin/site',
+            'icon' => 'fas fa-fw fa-lock',
+        ]
+
+
 
     ],
 
