@@ -26,10 +26,24 @@
                                 <input type="text" class="form-control" name="title"  placeholder="Meu titulo">
                             </div>
 
+                            <span style="color: red">
+                                    {{
+                                          $errors->has('title') ? $errors->first('title')
+                                          : ''
+                                    }}
+                                    </span>
+
                             <div class="form-group m-2">
                                 <label for="slug">Slug </label>
                                 <input type="text" class="form-control" name="slug"  placeholder="/meu-post">
                             </div>
+
+                            <span style="color: red">
+                                    {{
+                                          $errors->has('slug') ? $errors->first('slug')
+                                          : ''
+                                    }}
+                                    </span>
 
                             <div class="form-check m-2 mt-5">
                                 <input class="form-check-input" type="checkbox" name="emphasis" value="emphasis"  >
@@ -42,6 +56,13 @@
                                 <label for="slug">Imagem destaque </label>
                                 <input required type="file" class="form-control" name="image" >
                             </div>
+
+                            <span style="color: red">
+                                    {{
+                                          $errors->has('image') ? $errors->first('image')
+                                          : ''
+                                    }}
+                                    </span>
 
                             <div class="form-group m-2">
                                 <label for="slug">Categoria </label>
