@@ -102,7 +102,7 @@
                 <div class="row d-flex justify-content-between">
                     <div class="col-lg-3 col-md-3">
                         <div class="section-tittle mb-30">
-                            <h3>Whats New</h3>
+                            <h3>Veja mais</h3>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-9">
@@ -120,10 +120,10 @@
                             <!-- card one -->
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                 <div class="whats-news-caption">
-                                    <div class="row">
+                                    <div class="row ">
 
                                         @foreach($posts as $post)
-                                            <div class="col-lg-6 col-md-6">
+                                            <div class="col-lg-6 col-md-6 post ">
                                                 <div class="single-what-news mb-100">
                                                     <div class="what-img">
                                                         <img src="{{asset('public/image/'.$post->url_image)}}" alt="">
@@ -136,63 +136,17 @@
                                             </div>
                                         @endforeach
 
+                                            <button id="buttonLoading" onclick="loadingPost()" class="btn btn-success"> Ver mais... </button>
+                                            <input type="hidden" id="post" value="0">
+                                            <input type="hidden" id="all" value="{{$somaPosts}}">
+
                                     </div>
                                 </div>
                             </div>
                             <!-- Card two -->
 
                             <!-- Card three -->
-                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                                <div class="whats-news-caption">
-
-                                    <div class="row">
-
-                                        @foreach($posts as $post)
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="{{asset('public/image/'.$post->url_image)}}" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">{{$post->title}}</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @endforeach
-
-
-                                    </div>
-
-
-                                </div>
-                            </div>
                             <!-- card fure -->
-                            <div class="tab-pane fade" id="nav-last" role="tabpanel" aria-labelledby="nav-last-tab">
-                                <div class="whats-news-caption">
-                                    <div class="row">
-
-                                        @foreach($posts as $post)
-
-                                        <div class="col-lg-6 col-md-6">
-                                            <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <img src="{{asset('public/image/'.$post->url_image)}}" alt="">
-                                                </div>
-                                                <div class="what-cap">
-                                                    <span class="color1">Night party</span>
-                                                    <h4><a href="#">{{$post->title}}</a></h4>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        @endforeach
-
-
-
-                                    </div>
-                                </div>
-                            </div>
                             <!-- card Five -->
 
                         </div>
@@ -200,6 +154,9 @@
                     </div>
                 </div>
             </div>
+
+
+
             <div class="col-lg-4">
                 <!-- Section Tittle -->
                 <div class="section-tittle mb-40">

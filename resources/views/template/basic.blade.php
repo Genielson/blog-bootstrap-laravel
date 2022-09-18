@@ -70,6 +70,50 @@
 		<!-- Jquery Plugins, main Jquery -->
         <script src="{{asset('assets/js/plugins.js')}}"></script>
         <script src="{{asset('assets/js/main.js')}}"></script>
+        <script type="text/javascript">
+
+            function loadingPost() {
+                var url = "/loadingPosts";
+                console.log(url);
+                var xmlHttp = new XMLHttpRequest();
+                var row = parseInt(document.getElementById("post").value);
+                var all = parseInt(document.getElementById("all").value);
+                var rowPerPage = 4;
+                row = row + rowPerPage;
+                if(row <= all) {
+                    var myrow = document.getElementById("post");
+                    console.log(myrow);
+                    myrow.value = row;
+                    xmlHttp.onreadystatechange = function () {
+                        if (xmlHttp.readyState == XMLHttpRequest.DONE) {
+                            if (xmlHttp.status == 200) {
+                                console.log(this.responseText);
+                                var item = document.querySelectorAll(".post");
+                                var renderer = document.createElement('div');
+                                renderer.innerHTML = this.responseText;
+                                console.log(item);
+                                item[item.length - 1]
+                                    .insertAdjacentHTML('afterend',this.responseText);
+                            }
+                        }
+                    };
+                    xmlHttp.open('GET', url+"?row="+row, true);
+                    xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xmlHttp.send();
+                    console.log(row);
+                    if((row+rowPerPage >= all)){
+                        var button = document.getElementById("buttonLoading");
+                        button.style.display = "none";
+                    }
+
+                }else{
+                    var button = document.getElementById("buttonLoading");
+                    button.style.display = "none";
+                }
+
+            }
+
+        </script>
 
    </body>
 </html>

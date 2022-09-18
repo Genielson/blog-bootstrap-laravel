@@ -24,12 +24,14 @@ Route::get('/', function(){
     $posts = Post::limit(4)->get();
     $postsRecentes = Post::orderBy('created_at','desc')->limit(3)->get();
     $postPrincipal  = DB::table('emphasis')->join('posts','emphasis.post_id','=','posts.id')->get();
+    $somaPosts = Post::all()->count();
 
     return view('site.home',[
         'categorias'=>$categorias,
         'posts'=>$posts,
         'postsRecentes'=>$postsRecentes,
-        'postPrincipal'=>$postPrincipal
+        'postPrincipal'=>$postPrincipal,
+        'somaPosts' => $somaPosts
     ]);
 
 })->name('home');
@@ -62,6 +64,28 @@ Route::get('/ultimas-noticias',function(){
         compact('posts')
     );
 })->name('last-news');
+
+Route::get('/loadingPosts',function(){
+    $row = $_GET['row'];
+
+    $rowsPerPage = 4;
+    $posts = Post::skip($row)->take($rowsPerPage)->get()->toArray();
+    $html = "";
+    foreach ($posts as $post){
+
+       $html .= "<div class='col-lg-6 col-md-6 post'>";
+       $html .= "<div class='single-what-news mb-100'>";
+       $html .= "<div class='what-img'>";
+       $html .= "<img src='".asset('public/image/'.$post['url_image'])."' alt=''>";
+       $html .= "</div>";
+       $html .= "<div class='what-cap'>";
+       $html .= "<span class='color1'>Night party</span>";
+       $html .= "<h4><a href='#'>".$post['title']."</a></h4>";
+       $html .= "</div></div></div>";
+    }
+
+    echo $html;
+});
 
 Auth::routes();
 
