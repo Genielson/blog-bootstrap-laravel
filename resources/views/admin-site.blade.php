@@ -33,11 +33,25 @@
                                     <input required type="file" class="form-control" name="image" >
                                 </div>
 
+                                <span style="color: red">
+                                    {{
+                                          $errors->has('image') ? $errors->first('image')
+                                          : ''
+                                    }}
+                                    </span>
+
 
                                 <div class="form-group m-2">
                                     <label for="slug">Titulo do site </label>
                                     <input required type="text" class="form-control" name="title" >
                                 </div>
+
+                                <span style="color: red">
+                                    {{
+                                          $errors->has('title') ? $errors->first('title')
+                                          : ''
+                                    }}
+                                    </span>
 
 
                                 <div class="form-group m-2">
@@ -45,11 +59,25 @@
                                     <input required type="color" class="form-control" name="header" >
                                 </div>
 
+                                <span style="color: red">
+                                    {{
+                                          $errors->has('header') ? $errors->first('header')
+                                          : ''
+                                    }}
+                                    </span>
+
 
                                 <div class="form-group m-2">
                                     <label for="footer">Cor do Footer </label>
                                     <input required type="color" class="form-control" name="footer" >
                                 </div>
+
+                                <span style="color: red">
+                                    {{
+                                          $errors->has('footer') ? $errors->first('footer')
+                                          : ''
+                                    }}
+                                    </span>
 
                             </div>
 

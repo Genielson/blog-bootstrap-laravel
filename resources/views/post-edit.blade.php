@@ -26,12 +26,22 @@
                                 <label for="title">Titulo </label>
                                 <input type="text" class="form-control" name="title" value="{{$post['title']}}"  placeholder="Meu titulo">
                             </div>
-
+                            <span style="color: red">
+                                    {{
+                                          $errors->has('title') ? $errors->first('title')
+                                          : ''
+                                    }}
+                                    </span>
                             <div class="form-group m-2">
                                 <label for="slug">Slug </label>
                                 <input type="text" class="form-control" name="slug" value="{{$post['slug']}}"  placeholder="/meu-post">
                             </div>
-
+                            <span style="color: red">
+                                    {{
+                                          $errors->has('slug') ? $errors->first('slug')
+                                          : ''
+                                    }}
+                                    </span>
                             @if($post->url_image != NULL)
                                 <div class="form-group m-2 mt-5">
                                     <img width="60%" height="60%" src="{{asset('public/image/'.$post->url_image)}}" alt="">
@@ -41,19 +51,22 @@
                                    <h3 class="text-center"> Não foi inserida nenhuma imagem de destaque. </h3>
                                 </div>
                             @endif
-
                             <div class="form-check m-2 mt-5">
                                 <input class="form-check-input" type="checkbox" name="emphasis" value="emphasis" {{ $destaque != NULL ? "checked" : ""  }} >
                                 <label class="form-check-label" for="gridCheck">
                                     Destaque do blog
                                 </label>
                             </div>
-
                             <div class="form-group m-2">
                                 <label for="slug">Imagem destaque </label>
                                 <input  type="file"  class="form-control" name="image" >
                             </div>
-
+                            <span style="color: red">
+                                    {{
+                                          $errors->has('image') ? $errors->first('image')
+                                          : ''
+                                    }}
+                                    </span>
 
                             <div class="form-group m-2">
                                 <label for="slug">Categoria </label>
@@ -67,11 +80,15 @@
                                 @endforeach
                             </div>
 
-
-
                             <div class="form-group">
                                 <textarea class="ckeditor form-control" name="description"> {{$post['description']}}</textarea>
                             </div>
+                            <span style="color: red">
+                                    {{
+                                          $errors->has('description') ? $errors->first('description')
+                                          : ''
+                                    }}
+                                    </span>
                             <button class="btn btn-success" type="submit"> Salvar </button>
                         </form>
 

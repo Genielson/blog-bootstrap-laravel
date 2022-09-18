@@ -88,6 +88,25 @@ class SiteController extends Controller
     public function update(Request $request, $id)
     {
 
+        $regras = [
+            'title'=>'required|min:1|max:100',
+            'header'=>'required',
+            'footer'=>'required',
+            'image'=>'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
+        ];
+
+        $feedback = [
+            'title.required' => ' O titulo não pode estar em branco',
+            'title.min' => 'O titulo deve ter ao menos 1 caractere' ,
+            'title.max' => 'O titulo deve ter no máximo 100 caracteres',
+            'image.required' => ' É obrigatório inserir uma imagem ',
+            'image.image' => 'O upload tem que ser do tipo imagem',
+            'image.mimes' => ' O formato de envio deve ser pg,png,jpeg,gif,svg ',
+            'image.max' => ' O tamanho máximo para upload de imagem é 2MB',
+            'header.required' => ' É necessario escolher uma cor para o header ',
+            'footer.required' => ' É necessario escolher uma cor para o footer '
+        ];
+        $request->validate($regras,$feedback);
        $site = NULL;
        if($id == 0){
            $site = new Site();
