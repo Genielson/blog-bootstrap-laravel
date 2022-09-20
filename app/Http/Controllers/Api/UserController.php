@@ -4,9 +4,16 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
-class UserCoontroller extends Controller
+
+class UserController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth:api');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,8 @@ class UserCoontroller extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return response()->json($users);
     }
 
     /**
@@ -48,7 +56,7 @@ class UserCoontroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
