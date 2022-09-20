@@ -24,4 +24,3 @@ Route::post('auth/login', [\App\Http\Controllers\Api\AuthController::class,'logi
 Route::get('/users', [\App\Http\Controllers\Api\UserController::class,'index']);
 
 
-
