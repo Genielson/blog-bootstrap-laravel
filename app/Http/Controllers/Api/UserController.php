@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
@@ -56,8 +57,33 @@ class UserController extends Controller
             || $request->input('email') == NULL
         ){
             return response()->json([
-                'message' => 'Nome,email ou Senha vazio, por favor, envie todos os parametros'
+                'message' => 'Nome,email ou Senha vazio, por favor, envie todos os parametros',
+                'success' => false
             ],206);
+        }else{
+
+            $user = User::findOrFail($id);
+            if($user == NULL){
+                return response()->json([
+                    'message' => 'Usuario não encontrado ',
+                    'success' => false
+                ],404);
+            }else{
+                $user->name = $request->input('name');
+                $user->email = $request->input('email');
+                $user->password = Hash::make($request->input('password'));
+                if($user->save()){
+                    return response()->json([
+                        'message' => 'Usuario atualizado com sucesso',
+                        'success' => true
+                    ],200);
+                }else{
+                    return response()->json([
+                        'message' => 'Não foi possível atualizar o usuario, tente mais tarde',
+                        'success' => false
+                    ],200);
+                }
+            }
 
         }
 
@@ -86,11 +112,11 @@ class UserController extends Controller
         if($user->delete()){
             return response()->json([
                 'message' => 'Usuario deletado com sucesso!'
-            ],200);
+            ],204);
         }else{
             return response()->json([
                 'message' => 'Usuario não pode ser deletado, tente mais tarde!'
-            ],200);
+            ],204);
         }
 
     }
