@@ -34,7 +34,36 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        if($request->input('name') == NULL
+            || $request->input('password') == NULL
+            || $request->input('email') == NULL
+        ){
+            return response()->json([
+                'message' => 'Nome,email ou Senha está vazio, por favor, envie todos os parametros',
+                'success' => false
+            ],206);
+        }else{
+
+            if(User::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password'))
+            ])){
+                return response()->json([
+                    'message' => 'Usuario criado com sucesso ',
+                    'success' => true
+                ],200);
+            }else{
+                return response()->json([
+                    'message' => 'Não foi possivel criar o usuario no momento, tente mais tarde ',
+                    'success' => false
+                ],200);
+            }
+
+        }
+
+
     }
 
 
@@ -57,7 +86,7 @@ class UserController extends Controller
             || $request->input('email') == NULL
         ){
             return response()->json([
-                'message' => 'Nome,email ou Senha vazio, por favor, envie todos os parametros',
+                'message' => 'Nome,email ou Senha está vazio, por favor, envie todos os parametros',
                 'success' => false
             ],206);
         }else{
