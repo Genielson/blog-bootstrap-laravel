@@ -22,5 +22,9 @@ use App\Http\Middleware\apiProtectedRoute;
 
 Route::post('auth/login', [\App\Http\Controllers\Api\AuthController::class,'login']);
 Route::get('/users', [\App\Http\Controllers\Api\UserController::class,'index']);
+Route::post('/users/create',[\App\Http\Controllers\Api\UserController::class],'store');
+Route::put('/users/update/{id}',[\App\Http\Controllers\Api\UserController::class],'update');
+Route::delete('/users/delete/{id}',[\App\Http\Controllers\Api\UserController::class],'delete');
+
 
 
