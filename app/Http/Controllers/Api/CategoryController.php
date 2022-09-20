@@ -43,7 +43,7 @@ class CategoryController extends Controller
             $category = new Category();
             $category->title = $request->input('title');
             $category->url_image = $request->input('url_image');
-            $image = $request->file('image');
+            $image = $request->file('url_image');
             $filename = date('YmdHi').$image->getClientOriginalName();
             $category->url_image = $filename;
 
@@ -74,6 +74,46 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
 
+
+        if($id == NULL){
+            return response()->json([
+                'message' => 'O id deve ser diferente de zero'
+            ],206);
+        }
+        if($request->input('title') == NULL
+            || $request->input('url_image') == NULL
+        ){
+            return response()->json([
+                'message' => 'O titulo ou a imagem está vazio, por favor, envie todos os parametros',
+                'success' => false
+            ],206);
+        }else{
+            $category = Category::findOrFail($id);
+            if($category == NULL){
+                return response()->json([
+                    'message' => 'Categoria não encontrada ',
+                    'success' => false
+                ],404);
+            }else{
+                $category->title = $request->input('title');
+                $category->url_image = $request->input('url_image');
+                $image = $request->file('url_image');
+                $filename = date('YmdHi').$image->getClientOriginalName();
+                $category->url_image = $filename;
+                if($category->save()){
+                    $image->move(public_path('public/image'),$filename);
+                    return response()->json([
+                        'message' => 'Categoria atualizada com sucesso',
+                        'success' => true
+                    ],200);
+                }else{
+                    return response()->json([
+                        'message' => 'Não foi possível atualizar a categoria, tente mais tarde',
+                        'success' => false
+                    ],200);
+                }
+            }
+        }
 
 
     }
