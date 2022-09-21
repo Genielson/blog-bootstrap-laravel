@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Emphasis;
+use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class PostController extends Controller
@@ -33,7 +36,46 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
+        $allInputs = $request->all();
+        if( $allInputs['title'] == NULL || $allInputs['description'] == NULL ||
+            $allInputs['user_id'] == NULL || $allInputs['slug'] == NULL ||
+            $allInputs['url_image'] == NULL
+        ){
+            return response()->json([
+                'message' => 'Titulo,descricao,user_id,slug e url_image está vazio, por favor, envie todos os parametros',
+                'success' => false
+            ],206);
+        }
+        $user = User::findOrFail($allInputs['user_id']);
+        if($user == NULL){
+            return response()->json([
+                'message' => 'Nenhum usuario possui esse id',
+                'success' => false
+            ],404);
+        }
+        $id = $allInputs['user_id'];
+        $post = new Post();
+        $post->title = $request->input("title");
+        $post->description = $request->input("description");
+        $post->slug = $request->input("slug");
+        $image = $request->file('url_image');
+        $filename = date('YmdHi') . $image->getClientOriginalName();
+        $post->user_id = $id;
+        $post->url_image = $filename;
+        if($post->save()){
+            if($image != NULL) {
+                $image->move(public_path('public/image'), $filename);
+            }
+            return response()->json([
+                'message' => 'Post criado com sucesso',
+                'success' => true
+            ],200);
+        }else{
+            return response()->json([
+                'message' => 'Não foi possivel criar o post, tente mais tarde',
+                'success' => false
+            ],200);
+        }
 
     }
 
