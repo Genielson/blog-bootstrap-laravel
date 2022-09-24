@@ -9,6 +9,7 @@ use App\Models\PostCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class PostController extends Controller
@@ -76,7 +77,6 @@ class PostController extends Controller
                 'success' => false
             ],200);
         }
-
     }
 
 
@@ -84,12 +84,54 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $allInputs = $request->all();
+        if( $allInputs['title'] == NULL || $allInputs['description'] == NULL ||
+            $allInputs['user_id'] == NULL || $allInputs['slug'] == NULL ||
+            $allInputs['url_image'] == NULL ||  $allInputs['id']
+        ){
+            return response()->json([
+                'message' => 'Titulo,descricao,user_id,slug,url_image ou id está vazio, por favor, envie todos os parametros',
+                'success' => false
+            ],206);
+        }
+        $post = Post::findOrFail($allInputs['id']);
+        if($post == NULL){
+            return response()->json([
+                'message' => 'Nenhum Post possui esse id',
+                'success' => false
+            ],206);
+        }
 
+        $image = $request->file('url_image');
+        $post->fill(
+            [
+                'title'=>$request->input('title'),
+                'description' => $request->input('description')
+            ]);
+        $post->slug = $allInputs['slug'];
+        if ($image != NULL) {
+            $file_path = public_path() . '/public/image/' . $post->url_image;
+            File::delete($file_path);
+            $filename = date('YmdHi') . $image->getClientOriginalName();
+            $post->url_image = $filename;
+        }
+        if($post->save()){
+            $image->move(public_path('public/image'), $filename);
+            return response()->json([
+                'message' => 'Post atualizado com sucesso',
+                'success' => true
+            ],200);
+        }else{
+            return response()->json([
+                'message' => 'Não foi possivel atualizar o post, tente mais tarde',
+                'success' => false
+            ],200);
+
+        }
     }
 
     /**

@@ -6,13 +6,18 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
 
 
 class UserController extends Controller
 {
 
     public function __construct(){
-        $this->middleware('auth:api');
+        if(config('app.env') != 'testing'){
+            $this->middleware('auth:api');
+        }
+
     }
 
     /**
@@ -22,8 +27,19 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return response()->json($users);
+        $users = DB::table('users')->select('id','name','email','created_at')->get();
+        if(count($users) > 0){
+            return response()->json([
+                $users,
+                'success' => true
+            ],200);
+        }else{
+            return response()->json([
+                 'Não existem usuarios cadastrados',
+                'success' => false
+            ],404);
+        }
+
     }
 
     /**

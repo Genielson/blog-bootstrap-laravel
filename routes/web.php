@@ -104,8 +104,6 @@ Route::group(['middleware'=>'auth'], function(){
         \App\Http\Controllers\SiteController::class
     )->name('*','admin.site');
 
-
-
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
