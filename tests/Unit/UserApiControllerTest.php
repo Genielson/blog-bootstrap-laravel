@@ -35,7 +35,6 @@ class UserApiControllerTest extends TestCase
     }
 
     public function testCreateAUser(){
-
         $email = "teste".rand(0,100)."@gmail.com";
         $response = $this->json('POST','/api/users/create',[
             'name' => 'Genielson',
@@ -44,5 +43,11 @@ class UserApiControllerTest extends TestCase
         ]);
         $response->assertStatus(200);
         self::assertEquals(true,$response->getData()->success);
+    }
+
+    public function testDeleteAUser(){
+        $listTestUsers = $this->json('GET','/api/users');
+        $response = $this->json('DELETE',"/api/users/delete/{$listTestUsers[0][5]['id']}");
+        $response->assertStatus(204);
     }
 }
