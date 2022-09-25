@@ -51,6 +51,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
+
         if($request->input('name') == NULL
             || $request->input('password') == NULL
             || $request->input('email') == NULL

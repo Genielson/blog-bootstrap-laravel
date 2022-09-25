@@ -3,9 +3,12 @@
 namespace Tests\Unit;
 
 use App\Http\Controllers\Api\UserController;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Nette\Utils\Random;
 use Tests\TestCase;
 
-class UserControllerTest extends TestCase
+class UserApiControllerTest extends TestCase
 {
 
     /**
@@ -29,5 +32,17 @@ class UserControllerTest extends TestCase
                     ]
                 ]
         );
+    }
+
+    public function testCreateAUser(){
+
+        $email = "teste".rand(0,100)."@gmail.com";
+        $response = $this->json('POST','/api/users/create',[
+            'name' => 'Genielson',
+            'email' => $email,
+            'password' => Hash::make('testeteste')
+        ]);
+        $response->assertStatus(200);
+        self::assertEquals(true,$response->getData()->success);
     }
 }
