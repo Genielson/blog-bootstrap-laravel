@@ -50,4 +50,16 @@ class UserApiControllerTest extends TestCase
         $response = $this->json('DELETE',"/api/users/delete/{$listTestUsers[0][5]['id']}");
         $response->assertStatus(204);
     }
+
+    public function testUpdateUser(){
+        $listTestUsers = $this->json('GET','/api/users');
+        $email = "teste".rand(300,900)."@gmail.com";
+        $response = $this->json('PUT',"/api/users/update/{$listTestUsers[0][5]['id']}",[
+            'name'=> 'teste',
+            'email' => $email,
+            'password' => Hash::make('teste')
+        ]);
+        $response->assertStatus(200);
+        self::assertEquals(true,$response->getData()->success);
+    }
 }
