@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\File;
@@ -35,18 +36,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
 
 
-        $regras = ['category' => 'required|min:1|max:20'];
-        $feedback = [
-            'category.required' => 'O campo Nome deve ser preenchido',
-            'category.min' => 'O titulo deve ter ao menos 1 caractere',
-            'categoty.max' => 'O titulo deve ter no máximo 20 caracteres'
-        ];
-
-        $request->validate($regras,$feedback);
         $category = new Category();
         $category->title = $request->input('category');
 
@@ -90,23 +83,12 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
 
-        $regras = [
-           'category' => 'required|min:1|max:20'
-        ];
-        $feedback = [
-            'category.required' => 'O titulo precisa ser preenchido',
-            'category.min' => 'O titulo precisa ter no minimo 1 caractere',
-            'category.max' => 'O titulo precisa ter no máximo 20 caracteres '
-        ];
-        $request->validate($regras,$feedback);
         $categoria = Category::findOrFail($id);
-
         $file_path = public_path().'/public/image/'.$categoria->url_image;
         File::delete($file_path);
-
         $image = $request->file('image');
         $filename = date('YmdHi').$image->getClientOriginalName();
         $image->move(public_path('public/image'),$filename);
