@@ -48,7 +48,7 @@
                         <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
                             <!-- sticky -->
                                 <div class="sticky-logo">
-                                    <a href="{{route('home')}}"><img src="{{asset('assets/img/logo/logo.png')}}" alt=""></a>
+                                    <a href="{{route('home')}}"><img width="130px" height="100px" src="{{asset('assets/img/logo/php.png')}}" alt=""></a>
                                 </div>
                             <!-- Main-menu -->
                             <div class="main-menu d-none d-md-block">

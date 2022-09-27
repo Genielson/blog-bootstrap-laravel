@@ -10,7 +10,7 @@
                          <div class="single-footer-caption">
                              <!-- logo -->
                              <div class="footer-logo">
-                                 <a href="index.html"><img src="{{asset('assets/img/logo/logo2_footer.png')}}" alt=""></a>
+                                 <a href="index.html"><img width="130px" height="100px" src="{{asset('assets/img/logo/php.png')}}" alt=""></a>
                              </div>
                              <div class="footer-tittle">
                                  <div class="footer-pera">
