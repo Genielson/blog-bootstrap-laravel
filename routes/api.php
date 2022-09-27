@@ -26,5 +26,7 @@ Route::post('/users/create',[\App\Http\Controllers\Api\UserController::class,'st
 Route::put('/users/update/{id}',[\App\Http\Controllers\Api\UserController::class,'update']);
 Route::delete('/users/delete/{id}',[\App\Http\Controllers\Api\UserController::class,'destroy']);
 
+Route::get('/categories', [\App\Http\Controllers\Api\CategoryController::class,'index']);
+
 
 

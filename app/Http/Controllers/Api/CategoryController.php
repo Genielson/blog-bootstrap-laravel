@@ -6,12 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class CategoryController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth:api');
+        if(config('app.env') != 'testing'){
+            $this->middleware('auth:api');
+        }
     }
 
     /**
@@ -21,8 +24,18 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return response()->json($categories);
+        $categories = DB::table('categories')->select('id','title','created_at','url_image')->get();
+        if(count($categories) > 0){
+            return response()->json([
+                $categories,
+                'success' => true
+            ],200);
+        }else{
+            return response()->json([
+                'Não existem categorias cadastradas',
+                'success' => false
+            ],404);
+        }
     }
 
     /**
