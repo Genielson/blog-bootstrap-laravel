@@ -94,15 +94,18 @@ Route::group(['middleware'=>'auth'], function(){
 
     Route::resource('admin/category',
         CategoryController::class
-    )->name('*','admin.category');
+    )->name('*','admin.category')->middleware('can:isAdmin');
 
     Route::resource('admin/posts',
         \App\Http\Controllers\PostController::class
-    )->name('*','admin.posts');
+    )->name('*','admin.posts')->middleware('can:isAdmin');
 
     Route::resource('admin/site',
         \App\Http\Controllers\SiteController::class
-    )->name('*','admin.site');
+    )->name('*','admin.site')->middleware('can:isAdmin');
 
+    Route::resource('admin/home',
+        \App\Http\Controllers\HomeController::class
+    )->name('*','admin.site')->middleware('can:isAdmin');
 });
 
