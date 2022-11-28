@@ -5,10 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Repositories\CategoryRepository;
+use Exception;
 use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
+    public $repository;
+
+    public function __construct(CategoryRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,18 +47,16 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
+        $data = $request->validated();
+        try{
+          $this->repository->create($data);
+          return redirect()->route('category.index');
+        }catch(Exception $e){
+          return "Ocorreu um erro :(";
+        }
 
 
-        $category = new Category();
-        $category->title = $request->input('category');
 
-        $image = $request->file('image');
-        $filename = date('YmdHi').$image->getClientOriginalName();
-        $image->move(public_path('public/image'),$filename);
-        $category->url_image = $filename;
-
-        $category->save();
-        return redirect()->route('category.index');
     }
 
     /**
@@ -86,16 +93,15 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, $id)
     {
 
-        $categoria = Category::findOrFail($id);
-        $file_path = public_path().'/public/image/'.$categoria->url_image;
-        File::delete($file_path);
-        $image = $request->file('image');
-        $filename = date('YmdHi').$image->getClientOriginalName();
-        $image->move(public_path('public/image'),$filename);
-        $categoria->url_image = $filename;
-        $categoria->title = $request->input('category');
-        $categoria->save();
-        return redirect()->route('category.index');
+        $data = $request->validated();
+        try{
+           $this->repository->update($data,$id);
+           return redirect()->route('category.index');
+        }catch(Exception $e){
+           return "Ocorreu um erro :(";
+        }
+
+
 
     }
 
