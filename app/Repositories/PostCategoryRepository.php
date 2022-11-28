@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Repositories;
-use App\Models\Emphasis;
 use App\Models\PostCategory;
 
 class PostCategoryRepository {
@@ -11,15 +10,13 @@ class PostCategoryRepository {
         $this->model = new PostCategory();
     }
 
-    public function create(array $allInputs,$id){
+    public function create(array $allInputs,int $id){
         foreach ($allInputs['categoria'] as $categoria){
             $this->model->category_id = $categoria;
             $this->model->post_id = $id;
             $this->model->save();
         }
     }
-
-
 
 }
 

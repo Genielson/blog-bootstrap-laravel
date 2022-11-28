@@ -37,7 +37,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id','desc')->paginate(5);
+        try{
+            $posts = Post::orderBy('id','desc')->paginate(5);
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
         return view('posts',['posts' => $posts]);
     }
 
@@ -52,9 +56,6 @@ class PostController extends Controller
         return view('post-create',['categorias' => $categorias]);
     }
 
-
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -66,36 +67,17 @@ class PostController extends Controller
         $allInputs = $request->all();
         $id = Auth::user()->id;
         $data = $request->validated();
-
         try{
             $id = $this->postRepository->create($data);
             $this->emphasisRepository->setEmphasisInPost($id);
-            $this->postCategoryRepository->create($allInputs);
+            $this->postCategoryRepository->create($allInputs,$id);
         }catch(Exception $e){
             return $e->getMessage();
-        }
-
-
-
-        foreach ($allInputs['categoria'] as $categoria){
-            $postCategory = new PostCategory();
-            $postCategory->category_id = $categoria;
-            $postCategory->post_id = $post->id;
-            $postCategory->save();
         }
         return redirect('/admin/posts');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.

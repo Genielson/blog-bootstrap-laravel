@@ -28,5 +28,14 @@ class PostRepository {
         return $this->model->id;
     }
 
+    public function deletePost($id){
+
+        $post = $this->model::find($id);
+        $file_path = public_path().'/public/image/'.$post->url_image;
+        File::delete($file_path);
+        $post->delete();
+
+    }
+
 
 }
