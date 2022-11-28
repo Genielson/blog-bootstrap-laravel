@@ -49,7 +49,7 @@ class CategoryController extends Controller
         try{
           $this->repository->create($data);
         }catch(Exception $e){
-          return "Ocorreu um erro :(";
+            return $e->getMessage();
         }
         return redirect()->route('category.index');
 
@@ -82,7 +82,7 @@ class CategoryController extends Controller
            $this->repository->update($data,$id);
            return redirect()->route('category.index');
         }catch(Exception $e){
-           return "Ocorreu um erro :(";
+            return $e->getMessage();
         }
 
     }

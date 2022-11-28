@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Middleware\LogAccess;
-use Illuminate\Support\Facades\DB;
 use App\Models\LogAccessUser;
-use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;

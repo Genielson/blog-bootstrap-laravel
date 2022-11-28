@@ -42,24 +42,13 @@ class SiteController extends Controller
      */
     public function update(UpdateSiteRequest $request, $id)
     {
-
-       $site = NULL;
-       if($id == 0){
-           $site = new Site();
-       }else{
-           $site = Site::findOrFail($id);
-       }
-
-        $site->title = $request->input('title');
-        $image = $request->file('image');
-        $filename = date('YmdHi').$image->getClientOriginalName();
-        $image->move(public_path('public/image'),$filename);
-        $site->url_image_logo = $filename;
-
-        $site->header_background = $request->input('header');
-        $site->footer_background = $request->input('footer');
-        $site->save();
-        Session::flash('message','Site atualizado com sucesso! ');
+        $data = $request->validated();
+        try{
+           $this->repository->updateSiteConfiguration($data,$id);
+           Session::flash('message','Site atualizado com sucesso! ');
+        }catch(Exception $e){
+           return $e->getMessage();
+        }
         return redirect()->route('site.index');
     }
 
