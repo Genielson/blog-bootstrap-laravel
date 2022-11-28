@@ -12,62 +12,77 @@
 
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="col-lg-8">
-                        <!-- Trending Top -->
-                        <div class="trending-top mb-30">
-                            <div class="trend-top-img">
-                                <img src="{{asset('public/image/'.$postPrincipal[0]->url_image)}}" alt="">
-                                <div class="trend-top-cap">
-                                    <span>Appetizers</span>
-                                    <h2><a href="details.html">{{$postPrincipal[0]->title}}</a></h2>
+
+                    @if(count($postPrincipal) > 3)
+
+                            <div class="col-lg-8">
+                                <!-- Trending Top -->
+                                <div class="trending-top mb-30">
+
+                                        <div class="trend-top-img">
+                                            <img src="{{asset('public/image/'.$postPrincipal[0]->url_image)}}" alt="">
+                                            <div class="trend-top-cap">
+                                                <span>Appetizers</span>
+                                                <h2><a href="details.html">{{$postPrincipal[0]->title}}</a></h2>
+                                            </div>
+                                        </div>
+
+                                </div>
+                                <!-- Trending Bottom -->
+                                <div class="trending-bottom">
+                                    <h3> Recentes </h3> <br><br>
+                                    <div class="row">
+
+
+
+                                        <div class="col-lg-4">
+                                        <div class="single-bottom mb-35">
+                                            <div class="trend-bottom-img mb-30">
+                                                <img src="{{asset('public/image/'.$postsRecentes[0]['url_image'])}}" alt="">
+                                            </div>
+                                            <div class="trend-bottom-cap">
+                                                <span class="color1">Lifestyple</span>
+                                                <h4><a href="details.html">{{$postsRecentes[0]['title']}}</a></h4>
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="single-bottom mb-35">
+                                                <div class="trend-bottom-img mb-30">
+                                                    <img src="{{asset('public/image/'.$postsRecentes[1]['url_image'])}}" alt="">
+                                                </div>
+                                                <div class="trend-bottom-cap">
+                                                    <span class="color2">Sports</span>
+                                                    <h4><h4><a href="details.html">{{$postsRecentes[1]['title']}}</a></h4></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="single-bottom mb-35">
+                                                <div class="trend-bottom-img mb-30">
+                                                    <img src="{{asset('public/image/'.$postsRecentes[2]['url_image'])}}" alt="">
+                                                </div>
+                                                <div class="trend-bottom-cap">
+                                                    <span class="color3">Travels</span>
+                                                    <h4><a href="details.html"> {{$postsRecentes[2]['title']}}</a></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Trending Bottom -->
-                        <div class="trending-bottom">
-                            <h3> Recentes </h3> <br><br>
-                            <div class="row">
 
+                    @else
 
+                       <div class="mt-100">
+                          <h3> Não existe posts suficientes  </h3>
+                       </div>
 
-                                <div class="col-lg-4">
-                                <div class="single-bottom mb-35">
-                                    <div class="trend-bottom-img mb-30">
-                                        <img src="{{asset('public/image/'.$postsRecentes[0]['url_image'])}}" alt="">
-                                    </div>
-                                    <div class="trend-bottom-cap">
-                                        <span class="color1">Lifestyple</span>
-                                        <h4><a href="details.html">{{$postsRecentes[0]['title']}}</a></h4>
-                                    </div>
-                                </div>
-                                </div>
+                    @endif
 
-                                <div class="col-lg-4">
-                                    <div class="single-bottom mb-35">
-                                        <div class="trend-bottom-img mb-30">
-                                            <img src="{{asset('public/image/'.$postsRecentes[1]['url_image'])}}" alt="">
-                                        </div>
-                                        <div class="trend-bottom-cap">
-                                            <span class="color2">Sports</span>
-                                            <h4><h4><a href="details.html">{{$postsRecentes[1]['title']}}</a></h4></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="single-bottom mb-35">
-                                        <div class="trend-bottom-img mb-30">
-                                            <img src="{{asset('public/image/'.$postsRecentes[2]['url_image'])}}" alt="">
-                                        </div>
-                                        <div class="trend-bottom-cap">
-                                            <span class="color3">Travels</span>
-                                            <h4><a href="details.html"> {{$postsRecentes[2]['title']}}</a></h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <!-- Riht content -->
                     <div class="col-lg-4">
 

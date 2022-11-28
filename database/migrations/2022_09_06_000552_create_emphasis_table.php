@@ -15,7 +15,7 @@ class CreateEmphasisTable extends Migration
     {
         Schema::create('emphasis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("post_id");
+            $table->string("post_id")->default(0);
             $table->timestamps();
         });
 
