@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSiteRequest;
 use App\Http\Requests\UpdateSiteRequest;
 use App\Models\Site;
-use Illuminate\Http\Request;
+use App\Repositories\SiteRepository;
+use Exception;
 use Session;
 
 class SiteController extends Controller
 {
+    public $repository;
+
+    public function __construct(SiteRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,65 +24,13 @@ class SiteController extends Controller
      */
     public function index()
     {
-
-
-        $id = Site::limit(1)->get()->toArray();
-
-        if (count($id) == 0){
-            $id = 0;
-        }else{
-            $id = $id[0]['id'];
+        $id = NULL;
+        try{
+            $id = $this->repository->getIdConfigurationSite();
+        }catch(Exception $e){
+            return "Ocorreu um erro :( ";
         }
-
-        return view(
-            'admin-site',
-            [
-                'id' => $id
-            ]
-        );
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreSiteRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreSiteRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Site  $site
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Site $site)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Site  $site
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Site $site)
-    {
-        //
+        return view('admin-site',['id' => $id]);
     }
 
     /**
@@ -108,14 +63,4 @@ class SiteController extends Controller
         return redirect()->route('site.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Site  $site
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Site $site)
-    {
-        //
-    }
 }

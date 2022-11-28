@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
-use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
 use Exception;
-use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
@@ -50,24 +48,11 @@ class CategoryController extends Controller
         $data = $request->validated();
         try{
           $this->repository->create($data);
-          return redirect()->route('category.index');
         }catch(Exception $e){
           return "Ocorreu um erro :(";
         }
+        return redirect()->route('category.index');
 
-
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -78,9 +63,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $categoria = Category::findOrFail($id);
-
-        return view('category-edit',['categoria'=>$categoria]);
+        $category = Category::findOrFail($id);
+        return view('category-edit',['categoria'=>$category]);
     }
 
     /**
@@ -101,8 +85,6 @@ class CategoryController extends Controller
            return "Ocorreu um erro :(";
         }
 
-
-
     }
 
     /**
@@ -120,7 +102,6 @@ class CategoryController extends Controller
         }catch(Exception $e){
           return "Ocorreu um erro :(";
         }
-
 
     }
 }
