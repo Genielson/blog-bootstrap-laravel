@@ -8,6 +8,8 @@ use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\Category;
 use App\Repositories\PostRepository;
+use App\Repositories\PostCategoryRepository;
+use App\Repositories\EmphasisRepository;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -160,10 +162,11 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::find($id);
-        $file_path = public_path().'/public/image/'.$post->url_image;
-        File::delete($file_path);
-        $post->delete();
+        try{
+           $this->postRepository->deletePost($id);
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
         $postCategory = PostCategory::where('post_id','=',$id);
         $postCategory->delete();
         return redirect('/admin/posts');

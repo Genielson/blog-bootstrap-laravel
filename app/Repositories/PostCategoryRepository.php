@@ -18,6 +18,11 @@ class PostCategoryRepository {
         }
     }
 
+    public function deletePostCategory(int $id){
+        $postCategory = $this->model::where('post_id','=',$id);
+        $postCategory->delete();
+    }
+
 }
 
 
