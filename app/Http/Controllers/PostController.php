@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUser;
 use App\Models\Emphasis;
-use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\Category;
