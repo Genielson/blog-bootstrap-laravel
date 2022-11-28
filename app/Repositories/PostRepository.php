@@ -13,10 +13,7 @@ class PostRepository {
 
     public function create(array $request) : int{
 
-        $allInputs = $request->all();
-        $VALUE_ID_UPDATE = 1;
         $id = Auth::user()->id;
-
         $this->model->title = $request->input("title");
         $this->model->description = $request->input("description");
         $this->model->slug = $request->input("slug");
