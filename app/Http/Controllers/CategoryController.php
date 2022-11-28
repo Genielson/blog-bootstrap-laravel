@@ -114,10 +114,13 @@ class CategoryController extends Controller
     public function destroy($id)
     {
 
-        $categoria = Category::findOrFail($id);
-        $file_path = public_path().'/public/image/'.$categoria->url_image;
-        File::delete($file_path);
-        $categoria->delete();
-        return redirect()->route('category.index');
+        try{
+          $this->repository->destroy($id);
+          return redirect()->route('category.index');
+        }catch(Exception $e){
+          return "Ocorreu um erro :(";
+        }
+
+
     }
 }

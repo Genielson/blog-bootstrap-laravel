@@ -25,7 +25,7 @@ class CategoryRepository {
     }
 
     public function update(array $request, int $id){
-        $category = Category::findOrFail($id);
+        $category = $this->model::findOrFail($id);
         $file_path = public_path().'/public/image/'.$category->url_image;
         File::delete($file_path);
         $image = $request->file('image');
@@ -34,6 +34,13 @@ class CategoryRepository {
         $category->url_image = $filename;
         $category->title = $request->input('category');
         $category->save();
+    }
+
+    public function destroy(int $id){
+        $category = $this->model::findOrFail($id);
+        $file_path = public_path().'/public/image/'.$category->url_image;
+        File::delete($file_path);
+        $category->delete();
     }
 
 }
