@@ -7,11 +7,29 @@ use App\Models\Emphasis;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\Category;
+use App\Repositories\PostRepository;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
+
+    public $postRepository;
+    public $emphasisRepository;
+    public $postCategoryRepository;
+
+    public function __construct(PostRepository $postRepository,
+                                EmphasisRepository $emphasisRepository,
+                                PostCategoryRepository $postCategoryRepository
+
+    ){
+        $this->postRepository = $postRepository;
+        $this->emphasisRepository = $emphasisRepository;
+        $this->postCategoryRepository = $postCategoryRepository;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -46,34 +64,18 @@ class PostController extends Controller
     public function store(StoreUser $request)
     {
         $allInputs = $request->all();
-        $VALUE_ID_UPDATE = 1;
         $id = Auth::user()->id;
+        $data = $request->validated();
 
-
-        $post = new Post();
-        $post->title = $request->input("title");
-        $post->description = $request->input("description");
-        $post->slug = $request->input("slug");
-
-        $image = $request->file('image');
-        if($image != NULL) {
-            $filename = date('YmdHi') . $image->getClientOriginalName();
-            $image->move(public_path('public/image'), $filename);
-            $post->url_image = $filename;
+        try{
+            $id = $this->postRepository->create($data);
+            $this->emphasisRepository->setEmphasisInPost($id);
+            $this->postCategoryRepository->create($allInputs);
+        }catch(Exception $e){
+            return $e->getMessage();
         }
-        $post->user_id = $id;
-        $post->save();
 
-        $emphasis = Emphasis::all();
-        if(count($emphasis) == 0){
-            $newEmphasis = new Emphasis();
-            $newEmphasis->post_id = $post->id;
-            $newEmphasis->save();
-        }else{
-            $emphasis = Emphasis::find($VALUE_ID_UPDATE);
-            $emphasis->post_id = $post->id;
-            $emphasis->save();
-        }
+
 
         foreach ($allInputs['categoria'] as $categoria){
             $postCategory = new PostCategory();
