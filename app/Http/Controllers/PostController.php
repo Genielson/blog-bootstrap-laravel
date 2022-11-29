@@ -67,12 +67,10 @@ class PostController extends Controller
     public function store(StoreUser $request)
     {
         $allInputs = $request->all();
-        $id = Auth::user()->id;
-        $data = $request->validated();
         try{
-            $id = $this->postRepository->create($data);
+            $id = $this->postRepository->createOrUpdate($request->validated());
             $this->emphasisRepository->setEmphasisInPost($id);
-            $this->postCategoryRepository->create($allInputs,$id);
+            $this->postCategoryRepository->createOrUpdate($allInputs,$id);
         }catch(Exception $e){
             return $e->getMessage();
         }
@@ -89,16 +87,23 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        $post = NULL;
+        $categories = NULL;
+        $postCategory = NULL;
+        $emphasis = NULL;
 
-        $post = Post::findOrFail($id);
-        $categorias = Category::all();
-        $emphasis = Emphasis::getEmphasisById($id);
-        $categoriasDoPost = PostCategory::select('category_id')->
-        where('post_id', "=",$id)->pluck('category_id')->toArray();
+        try{
+            $post = Post::findOrFail($id);
+            $categories = Category::all();
+            $emphasis = Emphasis::getEmphasisById($id);
+            $postCategory = PostCategory::getPostCategoryById($id);
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
 
         return view(
-            'post-edit', ['post'=>$post, 'categorias' => $categorias,
-            'categoriasDoPost' => $categoriasDoPost,
+            'post-edit', ['post'=>$post, 'categorias' => $$categories,
+            'categoriasDoPost' => $postCategory,
                 'destaque'=>$emphasis
             ]
         );
@@ -114,42 +119,12 @@ class PostController extends Controller
     public function update(StoreUser $request, $id)
     {
         $allInputs = $request->all();
-        $VALUE_ID_UPDATE = 1;
-        $post = Post::find($id);
-        $emphasis = Emphasis::all();
-
-        if(count($emphasis) == 0){
-            $newEmphasis = new Emphasis();
-            $newEmphasis->post_id = $id;
-            $newEmphasis->save();
-        }else{
-            $emphasis = Emphasis::find($VALUE_ID_UPDATE);
-            $emphasis->post_id = $id;
-            $emphasis->save();
-        }
-        $image = $request->file('image');
-        $post->fill(
-            [
-                'title'=>$request->input('title'),
-                'description' => $request->input('description')
-
-        ]);
-        $post->slug = $allInputs['slug'];
-        if ($image != NULL) {
-            $file_path = public_path() . '/public/image/' . $post->url_image;
-            File::delete($file_path);
-            $filename = date('YmdHi') . $image->getClientOriginalName();
-            $image->move(public_path('public/image'), $filename);
-            $post->url_image = $filename;
-        }
-        $post->save();
-        $postCategory = PostCategory::where('post_id','=',$id);
-        $postCategory->delete();
-        foreach ($allInputs['categoria'] as $categoria){
-            $postCategory = new PostCategory();
-            $postCategory->category_id = $categoria;
-            $postCategory->post_id = $post->id;
-            $postCategory->save();
+        try{
+            $id = $this->postRepository->createOrUpdate($request->validated());
+            $this->emphasisRepository->setEmphasisInPost($id);
+            $this->postCategoryRepository->createOrUpdate($allInputs,$id);
+        }catch(Exception $e){
+            return $e->getMessage();
         }
         return redirect('/admin/posts');
     }

@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 use App\Models\Post;
+use Illuminate\Support\Facades\File;
 
 class PostRepository {
 
@@ -11,7 +12,11 @@ class PostRepository {
     }
 
 
-    public function create(array $request) : int{
+    public function createOrUpdate(array $request, int $id = null) : int{
+
+        if($id != null){
+            $this->model::findOrFail($id);
+        }
 
         $id = Auth::user()->id;
         $this->model->title = $request->input("title");

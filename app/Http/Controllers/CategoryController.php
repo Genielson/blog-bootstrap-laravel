@@ -45,9 +45,9 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $data = $request->validated();
+
         try{
-          $this->repository->create($data);
+          $this->repository->create($request->validated());
         }catch(Exception $e){
             return $e->getMessage();
         }
@@ -77,9 +77,8 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, $id)
     {
 
-        $data = $request->validated();
         try{
-           $this->repository->update($data,$id);
+           $this->repository->update($request->validated(),$id);
            return redirect()->route('category.index');
         }catch(Exception $e){
             return $e->getMessage();

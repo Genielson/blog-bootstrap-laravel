@@ -28,7 +28,7 @@ class SiteController extends Controller
         try{
             $id = $this->repository->getIdConfigurationSite();
         }catch(Exception $e){
-            return "Ocorreu um erro :( ";
+            return $e->getMessage();
         }
         return view('admin-site',['id' => $id]);
     }
@@ -42,9 +42,9 @@ class SiteController extends Controller
      */
     public function update(UpdateSiteRequest $request, $id)
     {
-        $data = $request->validated();
+
         try{
-           $this->repository->updateSiteConfiguration($data,$id);
+           $this->repository->updateSiteConfiguration($request->validated(),$id);
            Session::flash('message','Site atualizado com sucesso! ');
         }catch(Exception $e){
            return $e->getMessage();

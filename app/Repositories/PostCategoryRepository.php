@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 use App\Models\PostCategory;
-use Illuminate\Support\Facades\File;
 
 class PostCategoryRepository {
     private $model;
@@ -11,7 +10,11 @@ class PostCategoryRepository {
         $this->model = new PostCategory();
     }
 
-    public function create(array $allInputs,int $id){
+    public function createOrUpdate(array $allInputs,int $id){
+        $postCategory = PostCategory::where('post_id','=',$id);
+        if(count($postCategory) > 0){
+            $postCategory->delete();
+        }
         foreach ($allInputs['categoria'] as $categoria){
             $this->model->category_id = $categoria;
             $this->model->post_id = $id;
