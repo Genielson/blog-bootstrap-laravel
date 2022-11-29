@@ -163,12 +163,11 @@ class PostController extends Controller
     public function destroy($id)
     {
         try{
-           $this->postRepository->deletePost($id);
+            $this->postRepository->deletePost($id);
+            $this->postCategoryRepository->deletePostCategory($id);
         }catch(Exception $e){
             return $e->getMessage();
         }
-        $postCategory = PostCategory::where('post_id','=',$id);
-        $postCategory->delete();
         return redirect('/admin/posts');
     }
 }

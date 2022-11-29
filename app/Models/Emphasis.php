@@ -15,4 +15,9 @@ class Emphasis extends Model
     function post(){
             return $this->belongsTo(Post::class,'post_id');
     }
+
+    public function getEmphasisById(int $id){
+        return Emphasis::select()
+        ->where('post_id','=',$id)->get()->toArray();
+    }
 }

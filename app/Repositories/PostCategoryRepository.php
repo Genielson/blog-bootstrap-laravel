@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 use App\Models\PostCategory;
+use Illuminate\Support\Facades\File;
 
 class PostCategoryRepository {
     private $model;
