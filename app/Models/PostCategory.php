@@ -11,4 +11,10 @@ class PostCategory extends Model
     protected $fillable = ['post_id','category_id'];
 
 
+    public static function getPostCategoryById(int $id):array{
+        return PostCategory::select('category_id')->
+        where('post_id', "=",$id)->pluck('category_id')->toArray();
+    }
+
+
 }

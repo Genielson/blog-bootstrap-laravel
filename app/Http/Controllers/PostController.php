@@ -92,7 +92,7 @@ class PostController extends Controller
 
         $post = Post::findOrFail($id);
         $categorias = Category::all();
-        $emphasis = Emphasis::select()->where('post_id','=',$id)->get()->toArray();
+        $emphasis = Emphasis::getEmphasisById($id);
         $categoriasDoPost = PostCategory::select('category_id')->
         where('post_id', "=",$id)->pluck('category_id')->toArray();
 
