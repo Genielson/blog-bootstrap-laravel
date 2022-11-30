@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
-use App\Models\Category;
 use App\Repositories\CategoryRepository;
+
 use Exception;
 
 class CategoryController extends Controller
@@ -23,7 +23,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categorias = Category::paginate(5);
+        try{
+            $categorias = $this->repository->getSomeCategories();
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
         return view('categories',['categorias' => $categorias]);
     }
 
@@ -63,7 +67,11 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
+        try{
+            $category = $this->repository->getCategoryById($id);
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
         return view('category-edit',['categoria'=>$category]);
     }
 
@@ -76,14 +84,12 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
-
         try{
            $this->repository->update($request->validated(),$id);
            return redirect()->route('category.index');
         }catch(Exception $e){
             return $e->getMessage();
         }
-
     }
 
     /**

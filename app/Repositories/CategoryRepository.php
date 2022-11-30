@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Repositories;
+
+use App\Http\Contracts\CategoryRepositoryInterface;
 use App\Models\Category;
 use Illuminate\Support\Facades\File;
 
-class CategoryRepository {
+
+class CategoryRepository implements CategoryRepositoryInterface {
 
     private $model;
 
@@ -41,5 +44,16 @@ class CategoryRepository {
         File::delete($file_path);
         $category->delete();
     }
+
+    public function getSomeCategories(){
+        return Category::paginate(5);
+    }
+
+    public function getCategoryById(int $id)
+    {
+        return Category::findOrFail($id);
+    }
+
+
 
 }
