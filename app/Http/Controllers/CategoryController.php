@@ -99,7 +99,7 @@ class CategoryController extends Controller
           $this->repository->destroy($id);
           return redirect()->route('category.index');
         }catch(Exception $e){
-          return "Ocorreu um erro :(";
+          return $e->getMessage();
         }
 
     }

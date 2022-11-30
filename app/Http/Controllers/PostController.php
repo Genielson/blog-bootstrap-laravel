@@ -11,8 +11,6 @@ use App\Repositories\PostRepository;
 use App\Repositories\PostCategoryRepository;
 use App\Repositories\EmphasisRepository;
 use Exception;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
