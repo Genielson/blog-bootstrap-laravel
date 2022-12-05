@@ -3,8 +3,8 @@
 namespace App\Repositories;
 use App\Models\Post;
 use Illuminate\Support\Facades\File;
-
-class PostRepository {
+use App\Http\Contracts\PostRepositoryInterface;
+class PostRepository implements PostRepositoryInterface {
 
     public $model;
     public function __construct(){
@@ -12,10 +12,10 @@ class PostRepository {
     }
 
 
-    public function createOrUpdate(array $request, int $id = null) : int{
+    public function createOrUpdate(array $request, int $idPost = null) : int{
 
-        if($id != null){
-            $this->model::findOrFail($id);
+        if($idPost != null){
+            $this->model::findOrFail($idPost);
         }
 
         $id = Auth::user()->id;
@@ -40,6 +40,10 @@ class PostRepository {
         File::delete($file_path);
         $post->delete();
 
+    }
+
+    public function getSomePostsWithPaginate(){
+        return $this->model::orderBy('id','desc')->paginate(5);
     }
 
 

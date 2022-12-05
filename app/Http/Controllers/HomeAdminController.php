@@ -7,7 +7,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
 
-class HomeController extends Controller
+class HomeAdminController extends Controller
 {
     /**
      * Create a new controller instance.

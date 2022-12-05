@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Category;
 use App\Models\Post;
-use App\Mail\ContactMail;
 use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
@@ -20,18 +19,18 @@ use App\Http\Controllers\CategoryController;
 
 Route::get('/', function(){
 
-    $categorias = Category::all();
+    $categories = Category::all();
     $posts = Post::limit(4)->get();
-    $postsRecentes = Post::orderBy('created_at','desc')->limit(3)->get();
+    $postsRecents = Post::orderBy('created_at','desc')->limit(3)->get();
     $postPrincipal  = DB::table('emphasis')->join('posts','emphasis.post_id','=','posts.id')->get();
-    $somaPosts = Post::all()->count();
+    $sumPosts = Post::all()->count();
 
     return view('site.home',[
-        'categorias'=>$categorias,
+        'categorias'=>$categories,
         'posts'=>$posts,
-        'postsRecentes'=>$postsRecentes,
+        'postsRecentes'=>$postsRecents,
         'postPrincipal'=>$postPrincipal,
-        'somaPosts' => $somaPosts
+        'somaPosts' => $sumPosts
     ]);
 
 })->name('home');
@@ -105,7 +104,7 @@ Route::group(['middleware'=>'auth'], function(){
     )->name('*','admin.site')->middleware('can:isAdmin');
 
     Route::resource('admin/home',
-        \App\Http\Controllers\HomeController::class
+        \App\Http\Controllers\HomeAdminController::class
     )->name('*','admin.site')->middleware('can:isAdmin');
 });
 

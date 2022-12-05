@@ -7,6 +7,7 @@ use App\Models\Emphasis;
 use App\Models\Post;
 use App\Models\PostCategory;
 use App\Models\Category;
+use App\Repositories\CategoryRepository;
 use App\Repositories\PostRepository;
 use App\Repositories\PostCategoryRepository;
 use App\Repositories\EmphasisRepository;
@@ -18,15 +19,18 @@ class PostController extends Controller
     public $postRepository;
     public $emphasisRepository;
     public $postCategoryRepository;
+    public $categoryRepository;
 
     public function __construct(PostRepository $postRepository,
                                 EmphasisRepository $emphasisRepository,
-                                PostCategoryRepository $postCategoryRepository
+                                PostCategoryRepository $postCategoryRepository,
+                                CategoryRepository $categoryRepository
 
     ){
         $this->postRepository = $postRepository;
         $this->emphasisRepository = $emphasisRepository;
         $this->postCategoryRepository = $postCategoryRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
 
@@ -38,7 +42,7 @@ class PostController extends Controller
     public function index()
     {
         try{
-            $posts = Post::orderBy('id','desc')->paginate(5);
+            $posts = $this->postRepository->getSomePostsWithPaginate();
         }catch(Exception $e){
             return $e->getMessage();
         }
@@ -52,8 +56,12 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categorias = Category::all();
-        return view('post-create',['categorias' => $categorias]);
+        try{
+            $categories = $this->categoryRepository->getAllCategories();
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+        return view('post-create',['categorias' => $categories]);
     }
 
     /**

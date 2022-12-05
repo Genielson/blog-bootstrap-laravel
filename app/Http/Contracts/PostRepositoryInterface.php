@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Contracts;
 
-interface CategoryRepositoryInterface {
+interface PostRepositoryInterface {
 
     public function getSomeCategories();
     public function getCategoryById(int $id);

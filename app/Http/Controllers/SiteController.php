@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateSiteRequest;
-use App\Models\Site;
 use App\Repositories\SiteRepository;
 use Exception;
 use Session;
@@ -12,7 +11,10 @@ class SiteController extends Controller
 {
     public $repository;
 
-    public function __construct(SiteRepository $repository)
+    public function __construct(
+        SiteRepository $repository
+
+        )
     {
         $this->repository = $repository;
     }
@@ -50,6 +52,24 @@ class SiteController extends Controller
            return $e->getMessage();
         }
         return redirect()->route('site.index');
+    }
+
+    public function getItensToVisitantPage(){
+
+        $categories = Category::all();
+        $posts = Post::limit(4)->get();
+        $postsRecents = Post::orderBy('created_at','desc')->limit(3)->get();
+        $postPrincipal  = DB::table('emphasis')->join('posts','emphasis.post_id','=','posts.id')->get();
+        $sumPosts = Post::all()->count();
+
+        return view('site.home',[
+            'categorias'=>$categories,
+            'posts'=>$posts,
+            'postsRecentes'=>$postsRecents,
+            'postPrincipal'=>$postPrincipal,
+            'somaPosts' => $sumPosts
+        ]);
+
     }
 
 }
