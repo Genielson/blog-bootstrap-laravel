@@ -63,8 +63,6 @@ class SiteController extends Controller
         $postsRecents = Post::orderBy('created_at','desc')->limit(3)->get();
         $postPrincipal  = DB::table('emphasis')->join('posts','emphasis.post_id','=','posts.id')->get();
         $sumPosts = Post::all()->count();
-        echo var_dump($postPrincipal);exit;
-
         return view('site.home',[
             'categorias'=>$categories,
             'posts'=>$posts,

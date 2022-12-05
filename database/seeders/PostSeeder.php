@@ -18,11 +18,6 @@ class PostSeeder extends Seeder
         DB::table('emphasis')->insert([
             'post_id' => 1
         ]);
-        DB::table('emphasis')->insert([
-            'post_id' => 2
-        ]);
-        DB::table('emphasis')->insert([
-            'post_id' => 3
-        ]);
+
     }
 }

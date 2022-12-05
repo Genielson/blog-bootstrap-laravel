@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Category;
 use App\Models\Post;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeAdminController;
 use App\Http\Controllers\SiteController;
 
 /*
@@ -74,7 +74,7 @@ Route::get('/loadingPosts',function(){
 
 Auth::routes();
 
-
+Route::get('/home',[HomeAdminController::class,'index']);
 Route::group(['middleware'=>'auth'], function(){
 
     Route::resource('admin/category',

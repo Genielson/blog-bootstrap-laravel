@@ -15,7 +15,7 @@
 
                 <div class="row">
 
-                    @if(count($postPrincipal) >= 3)
+                    @if(count($postPrincipal) >= 1)
 
                             <div class="col-lg-8">
                                 <!-- Trending Top -->
