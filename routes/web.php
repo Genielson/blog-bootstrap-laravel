@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Category;
 use App\Models\Post;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SiteController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,23 +19,7 @@ use App\Http\Controllers\CategoryController;
 
 
 
-Route::get('/', function(){
-
-    $categories = Category::all();
-    $posts = Post::limit(4)->get();
-    $postsRecents = Post::orderBy('created_at','desc')->limit(3)->get();
-    $postPrincipal  = DB::table('emphasis')->join('posts','emphasis.post_id','=','posts.id')->get();
-    $sumPosts = Post::all()->count();
-
-    return view('site.home',[
-        'categorias'=>$categories,
-        'posts'=>$posts,
-        'postsRecentes'=>$postsRecents,
-        'postPrincipal'=>$postPrincipal,
-        'somaPosts' => $sumPosts
-    ]);
-
-})->name('home');
+Route::get('/',[SiteController::class,'getItensToVisitantPage'])->name('home');
 
 Route::get('/categorias',function(){
     return view('site.categories');

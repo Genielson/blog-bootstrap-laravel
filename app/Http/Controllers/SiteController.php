@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Category;
+use App\Models\Post;
 use App\Http\Requests\UpdateSiteRequest;
 use App\Repositories\SiteRepository;
+use Illuminate\Support\Facades\DB;
 use Exception;
 use Session;
 
@@ -61,6 +63,7 @@ class SiteController extends Controller
         $postsRecents = Post::orderBy('created_at','desc')->limit(3)->get();
         $postPrincipal  = DB::table('emphasis')->join('posts','emphasis.post_id','=','posts.id')->get();
         $sumPosts = Post::all()->count();
+        echo var_dump($postPrincipal);exit;
 
         return view('site.home',[
             'categorias'=>$categories,
