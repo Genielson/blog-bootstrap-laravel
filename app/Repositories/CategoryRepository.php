@@ -15,7 +15,6 @@ class CategoryRepository implements CategoryRepositoryInterface {
     }
 
     public function create(array $request){
-
         $this->model->title = $request['category'];
         $image = $request['image'];
         $filename = date('YmdHi').$image->getClientOriginalName();
@@ -29,11 +28,11 @@ class CategoryRepository implements CategoryRepositoryInterface {
         $category = $this->model::findOrFail($id);
         $file_path = public_path().'/public/image/'.$category->url_image;
         File::delete($file_path);
-        $image = $request->file('image');
+        $image = $request['image'];
         $filename = date('YmdHi').$image->getClientOriginalName();
         $image->move(public_path('public/image'),$filename);
         $category->url_image = $filename;
-        $category->title = $request->input('category');
+        $category->title = $request['category'];
         $category->save();
     }
 
