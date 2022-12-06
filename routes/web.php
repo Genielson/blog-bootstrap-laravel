@@ -74,16 +74,21 @@ Route::get('/loadingPosts',function(){
 
 Auth::routes();
 
-Route::get('/home',[HomeAdminController::class,'index']);
+Route::get('/home',[HomeAdminController::class,'index'] );
+
+Route::resource('admin/category',
+CategoryController::class
+)->name('*','admin.category');
+
+
 Route::group(['middleware'=>'auth'], function(){
 
-    Route::resource('admin/category',
-        CategoryController::class
-    )->name('*','admin.category')->middleware('can:isAdmin');
+
 
     Route::resource('admin/posts',
-        \App\Http\Controllers\PostController::class
+    \App\Http\Controllers\PostController::class
     )->name('*','admin.posts')->middleware('can:isAdmin');
+
 
     Route::resource('admin/site',
         \App\Http\Controllers\SiteController::class
