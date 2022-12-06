@@ -50,6 +50,7 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
 
+
         try{
           $this->repository->create($request->validated());
         }catch(Exception $e){

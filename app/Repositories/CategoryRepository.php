@@ -6,19 +6,18 @@ use App\Http\Contracts\CategoryRepositoryInterface;
 use App\Models\Category;
 use Illuminate\Support\Facades\File;
 
-
 class CategoryRepository implements CategoryRepositoryInterface {
 
     private $model;
 
-    public function  __construction(){
+    function __construct() {
         $this->model = new Category();
     }
 
     public function create(array $request){
 
-        $this->model->title = $request->input('category');
-        $image = $request->file('image');
+        $this->model->title = $request['category'];
+        $image = $request['image'];
         $filename = date('YmdHi').$image->getClientOriginalName();
         $image->move(public_path('public/image'),$filename);
         $this->model->url_image = $filename;

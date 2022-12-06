@@ -14,7 +14,7 @@ class CategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check(); // <-------
+        return Auth::user()->isAdmin; // <-------
     }
 
     /**
@@ -25,7 +25,8 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'category' => 'required|min:1|max:20'
+            'category' => 'required|min:1|max:20',
+            'image' => 'required'
         ];
     }
 
@@ -34,7 +35,8 @@ class CategoryRequest extends FormRequest
         return [
             'category.required' => 'O campo Nome deve ser preenchido',
             'category.min' => 'O titulo deve ter ao menos 1 caractere',
-            'categoty.max' => 'O titulo deve ter no máximo 20 caracteres'
+            'category.max' => 'O titulo deve ter no máximo 20 caracteres',
+            'image.required' => 'É necessário inserir uma imagem '
         ];
     }
 
