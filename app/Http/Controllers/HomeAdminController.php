@@ -6,6 +6,9 @@ use App\Models\LogAccessUser;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
+use App\Repositories\CategoryRepository;
+use App\Repositories\PostRepository;
+use App\Repositories\UserRepository;
 
 class HomeAdminController extends Controller
 {
@@ -14,9 +17,20 @@ class HomeAdminController extends Controller
      *
      * @return void
      */
-    public function __construct()
+
+     public $postRepository;
+     public $userRepository;
+     public $categoryRepository;
+
+    public function __construct(PostRepository $postRepository,
+    CategoryRepository $categoryRepository,
+    UserRepository $userRepository
+    )
     {
         $this->middleware('auth');
+        $this->postRepository = $postRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -27,16 +41,16 @@ class HomeAdminController extends Controller
     public function index()
     {
 
-        $totalPosts = Post::all()->count();
-        $totalUsuarios = User::all()->count();
-        $totalCategorias = Category::all()->count();
-        $totalVisitantes = LogAccessUser::all()->count();
+        $totalPosts = $this->postRepository->getCountPosts();
+        $totalUsers = $this->userRepository->getCountUser();
+        $totalCategories = $this->categoryRepository->getCountCategories();
+        $totalVisitants = LogAccessUser::all()->count();
 
         return view('home',[
             'totalPosts'=>$totalPosts,
-            'totalUsuarios'=>$totalUsuarios,
-            'totalCategorias'=>$totalCategorias,
-            'totalVisitantes'=>$totalVisitantes
+            'totalUsuarios'=>$totalUsers,
+            'totalCategorias'=>$totalCategories,
+            'totalVisitantes'=>$totalVisitants
         ]);
     }
 

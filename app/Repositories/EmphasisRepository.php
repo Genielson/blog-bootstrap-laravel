@@ -7,13 +7,12 @@ class EmphasisRepository {
     private $model;
     private $VALUE_ID_UPDATE = 1;
 
-    public function  __construction(){
+    public function __construct() {
         $this->model = new Emphasis();
     }
 
 
     public function setEmphasisInPost(int $id){
-
         $emphasis = $this->model::all();
         if(count($emphasis) == 0){
             $newEmphasis = new Emphasis();
@@ -24,7 +23,6 @@ class EmphasisRepository {
             $emphasis->post_id = $id;
             $emphasis->save();
         }
-
     }
 
 }
