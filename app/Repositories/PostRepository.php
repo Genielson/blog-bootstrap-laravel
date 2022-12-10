@@ -46,6 +46,8 @@ class PostRepository implements PostRepositoryInterface {
         return $this->model::orderBy('id','desc')->paginate(5);
     }
 
-
+    public function getCountPosts(){
+        return $this->model::all()->count();
+    }
 
 }
