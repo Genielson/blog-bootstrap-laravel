@@ -57,6 +57,10 @@ class CategoryRepository implements CategoryRepositoryInterface {
         return Category::all();
     }
 
+    public function getCountCategories(){
+        return Category::all()->count();
+    }
+
 
 
 }
