@@ -7,8 +7,10 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
 use App\Repositories\CategoryRepository;
+use App\Repositories\LogAccessUserRepository;
 use App\Repositories\PostRepository;
 use App\Repositories\UserRepository;
+use Exception;
 
 class HomeAdminController extends Controller
 {
@@ -21,16 +23,19 @@ class HomeAdminController extends Controller
      public $postRepository;
      public $userRepository;
      public $categoryRepository;
+     public $logAccessUserRepository;
 
     public function __construct(PostRepository $postRepository,
     CategoryRepository $categoryRepository,
-    UserRepository $userRepository
+    UserRepository $userRepository,
+    LogAccessUserRepository $logAccessUserRepository
     )
     {
         $this->middleware('auth');
         $this->postRepository = $postRepository;
         $this->categoryRepository = $categoryRepository;
         $this->userRepository = $userRepository;
+        $this->logAccessUserRepository = $logAccessUserRepository;
     }
 
     /**
@@ -41,10 +46,14 @@ class HomeAdminController extends Controller
     public function index()
     {
 
-        $totalPosts = $this->postRepository->getCountPosts();
-        $totalUsers = $this->userRepository->getCountUser();
-        $totalCategories = $this->categoryRepository->getCountCategories();
-        $totalVisitants = LogAccessUser::all()->count();
+        try{
+            $totalPosts = $this->postRepository->getCountPosts();
+            $totalUsers = $this->userRepository->getCountUser();
+            $totalCategories = $this->categoryRepository->getCountCategories();
+            $totalVisitants = $this->logAccessUserRepository->getCountLogAcessUser();
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
 
         return view('home',[
             'totalPosts'=>$totalPosts,

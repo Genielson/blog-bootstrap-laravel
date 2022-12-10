@@ -12,7 +12,7 @@ class LogAccessUserRepository {
     }
 
     public function getCountLogAcessUser(){
-        return LogAccessUser::all()->count();
+        return $this->model::all()->count();
     }
 
 }
