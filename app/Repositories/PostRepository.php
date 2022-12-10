@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\Models\Post;
 use Illuminate\Support\Facades\File;
 use App\Http\Contracts\PostRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 class PostRepository implements PostRepositoryInterface {
 
     public $model;
@@ -48,6 +49,18 @@ class PostRepository implements PostRepositoryInterface {
 
     public function getCountPosts(){
         return $this->model::all()->count();
+    }
+
+    public function getPostPrincipal(){
+        return DB::table('emphasis')->join('posts','emphasis.post_id','=','posts.id')->get();
+    }
+
+    public function getPostsRecents(){
+        return Post::orderBy('created_at','desc')->limit(3)->get();
+    }
+
+    public function getPostsPerNumber(int $number){
+        return Post::limit($number)->get();
     }
 
 }
